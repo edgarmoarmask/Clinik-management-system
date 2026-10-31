@@ -2,7 +2,7 @@
 
 import { type Client, type Options as Options2, type TDataShape, urlSearchParamsBodySerializer } from './client';
 import { client } from './client.gen';
-import type { clinicalRecordsCreateClinicalRecordData, clinicalRecordsCreateClinicalRecordErrors, clinicalRecordsCreateClinicalRecordResponses, clinicalRecordsDeleteClinicalRecordData, clinicalRecordsDeleteClinicalRecordErrors, clinicalRecordsDeleteClinicalRecordResponses, clinicalRecordsReadClinicalRecordData, clinicalRecordsReadClinicalRecordErrors, clinicalRecordsReadClinicalRecordResponses, clinicalRecordsReadClinicalRecordsData, clinicalRecordsReadClinicalRecordsErrors, clinicalRecordsReadClinicalRecordsResponses, clinicalRecordsUpdateClinicalRecordData, clinicalRecordsUpdateClinicalRecordErrors, clinicalRecordsUpdateClinicalRecordResponses, itemsCreateItemData, itemsCreateItemErrors, itemsCreateItemResponses, itemsDeleteItemData, itemsDeleteItemErrors, itemsDeleteItemResponses, itemsReadItemData, itemsReadItemErrors, itemsReadItemResponses, itemsReadItemsData, itemsReadItemsErrors, itemsReadItemsResponses, itemsUpdateItemData, itemsUpdateItemErrors, itemsUpdateItemResponses, loginLoginAccessTokenData, loginLoginAccessTokenErrors, loginLoginAccessTokenResponses, loginRecoverPasswordData, loginRecoverPasswordErrors, loginRecoverPasswordHtmlContentData, loginRecoverPasswordHtmlContentErrors, loginRecoverPasswordHtmlContentResponses, loginRecoverPasswordResponses, loginResetPasswordData, loginResetPasswordErrors, loginResetPasswordResponses, loginTestTokenData, loginTestTokenResponses, patientsCreatePatientData, patientsCreatePatientErrors, patientsCreatePatientResponses, patientsDeletePatientData, patientsDeletePatientErrors, patientsDeletePatientResponses, patientsReadPatientData, patientsReadPatientErrors, patientsReadPatientResponses, patientsReadPatientsData, patientsReadPatientsErrors, patientsReadPatientsResponses, patientsUpdatePatientData, patientsUpdatePatientErrors, patientsUpdatePatientResponses, prescriptionsCreatePrescriptionData, prescriptionsCreatePrescriptionErrors, prescriptionsCreatePrescriptionResponses, prescriptionsDeletePrescriptionData, prescriptionsDeletePrescriptionErrors, prescriptionsDeletePrescriptionResponses, prescriptionsReadPrescriptionData, prescriptionsReadPrescriptionErrors, prescriptionsReadPrescriptionResponses, prescriptionsReadPrescriptionsData, prescriptionsReadPrescriptionsErrors, prescriptionsReadPrescriptionsResponses, prescriptionsUpdatePrescriptionData, prescriptionsUpdatePrescriptionErrors, prescriptionsUpdatePrescriptionResponses, privateCreateUserData, privateCreateUserErrors, privateCreateUserResponses, usersCreateUserData, usersCreateUserErrors, usersCreateUserResponses, usersDeleteUserData, usersDeleteUserErrors, usersDeleteUserMeData, usersDeleteUserMeResponses, usersDeleteUserResponses, usersReadUserByIdData, usersReadUserByIdErrors, usersReadUserByIdResponses, usersReadUserMeData, usersReadUserMeResponses, usersReadUsersData, usersReadUsersErrors, usersReadUsersResponses, usersRegisterUserData, usersRegisterUserErrors, usersRegisterUserResponses, usersUpdatePasswordMeData, usersUpdatePasswordMeErrors, usersUpdatePasswordMeResponses, usersUpdateUserData, usersUpdateUserErrors, usersUpdateUserMeData, usersUpdateUserMeErrors, usersUpdateUserMeResponses, usersUpdateUserResponses, utilsHealthCheckData, utilsHealthCheckResponses, utilsTestEmailData, utilsTestEmailErrors, utilsTestEmailResponses } from './types.gen';
+import type { clinicalRecordsCreateClinicalRecordData, clinicalRecordsCreateClinicalRecordErrors, clinicalRecordsCreateClinicalRecordResponses, clinicalRecordsDeleteClinicalRecordData, clinicalRecordsDeleteClinicalRecordErrors, clinicalRecordsDeleteClinicalRecordResponses, clinicalRecordsReadClinicalRecordData, clinicalRecordsReadClinicalRecordErrors, clinicalRecordsReadClinicalRecordResponses, clinicalRecordsReadClinicalRecordsData, clinicalRecordsReadClinicalRecordsErrors, clinicalRecordsReadClinicalRecordsResponses, clinicalRecordsUpdateClinicalRecordData, clinicalRecordsUpdateClinicalRecordErrors, clinicalRecordsUpdateClinicalRecordResponses, itemsCreateItemData, itemsCreateItemErrors, itemsCreateItemResponses, itemsDeleteItemData, itemsDeleteItemErrors, itemsDeleteItemResponses, itemsReadItemData, itemsReadItemErrors, itemsReadItemResponses, itemsReadItemsData, itemsReadItemsErrors, itemsReadItemsResponses, itemsUpdateItemData, itemsUpdateItemErrors, itemsUpdateItemResponses, loginLoginAccessTokenData, loginLoginAccessTokenErrors, loginLoginAccessTokenResponses, loginRecoverPasswordData, loginRecoverPasswordErrors, loginRecoverPasswordHtmlContentData, loginRecoverPasswordHtmlContentErrors, loginRecoverPasswordHtmlContentResponses, loginRecoverPasswordResponses, loginResetPasswordData, loginResetPasswordErrors, loginResetPasswordResponses, loginTestTokenData, loginTestTokenResponses, patientsCreatePatientData, patientsCreatePatientErrors, patientsCreatePatientResponses, patientsDeletePatientData, patientsDeletePatientErrors, patientsDeletePatientResponses, patientsReadPatientData, patientsReadPatientErrors, patientsReadPatientResponses, patientsReadPatientsData, patientsReadPatientsErrors, patientsReadPatientsResponses, patientsUpdatePatientData, patientsUpdatePatientErrors, patientsUpdatePatientResponses, pharmaciesCreatePharmacyData, pharmaciesCreatePharmacyErrors, pharmaciesCreatePharmacyResponses, pharmaciesDeletePharmacyData, pharmaciesDeletePharmacyErrors, pharmaciesDeletePharmacyResponses, pharmaciesReadPharmaciesData, pharmaciesReadPharmaciesErrors, pharmaciesReadPharmaciesResponses, pharmaciesReadPharmacyData, pharmaciesReadPharmacyErrors, pharmaciesReadPharmacyResponses, pharmaciesUpdatePharmacyData, pharmaciesUpdatePharmacyErrors, pharmaciesUpdatePharmacyResponses, prescriptionsCreatePrescriptionData, prescriptionsCreatePrescriptionErrors, prescriptionsCreatePrescriptionResponses, prescriptionsDeletePrescriptionData, prescriptionsDeletePrescriptionErrors, prescriptionsDeletePrescriptionResponses, prescriptionsReadPrescriptionData, prescriptionsReadPrescriptionErrors, prescriptionsReadPrescriptionResponses, prescriptionsReadPrescriptionsData, prescriptionsReadPrescriptionsErrors, prescriptionsReadPrescriptionsResponses, prescriptionsUpdatePrescriptionData, prescriptionsUpdatePrescriptionErrors, prescriptionsUpdatePrescriptionResponses, privateCreateUserData, privateCreateUserErrors, privateCreateUserResponses, usersCreateUserData, usersCreateUserErrors, usersCreateUserResponses, usersDeleteUserData, usersDeleteUserErrors, usersDeleteUserMeData, usersDeleteUserMeResponses, usersDeleteUserResponses, usersReadUserByIdData, usersReadUserByIdErrors, usersReadUserByIdResponses, usersReadUserMeData, usersReadUserMeResponses, usersReadUsersData, usersReadUsersErrors, usersReadUsersResponses, usersRegisterUserData, usersRegisterUserErrors, usersRegisterUserResponses, usersUpdatePasswordMeData, usersUpdatePasswordMeErrors, usersUpdatePasswordMeResponses, usersUpdateUserData, usersUpdateUserErrors, usersUpdateUserMeData, usersUpdateUserMeErrors, usersUpdateUserMeResponses, usersUpdateUserResponses, utilsHealthCheckData, utilsHealthCheckResponses, utilsTestEmailData, utilsTestEmailErrors, utilsTestEmailResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -571,6 +571,78 @@ export class PrescriptionsService {
             responseType: 'json',
             security: [{ scheme: 'bearer', type: 'http' }],
             url: '/api/v1/prescriptions/{id}',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+}
+
+export class PharmaciesService {
+    /**
+     * Read Pharmacies
+     *
+     * Retrieve pharmacies. `q` matches name, city or license number.
+     */
+    public static readPharmacies<ThrowOnError extends boolean = true>(options?: Options<pharmaciesReadPharmaciesData, ThrowOnError>) {
+        return (options?.client ?? client).get<pharmaciesReadPharmaciesResponses, pharmaciesReadPharmaciesErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pharmacies/',
+            ...options
+        });
+    }
+    
+    /**
+     * Create Pharmacy
+     */
+    public static createPharmacy<ThrowOnError extends boolean = true>(options: Options<pharmaciesCreatePharmacyData, ThrowOnError>) {
+        return (options.client ?? client).post<pharmaciesCreatePharmacyResponses, pharmaciesCreatePharmacyErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pharmacies/',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Delete Pharmacy
+     */
+    public static deletePharmacy<ThrowOnError extends boolean = true>(options: Options<pharmaciesDeletePharmacyData, ThrowOnError>) {
+        return (options.client ?? client).delete<pharmaciesDeletePharmacyResponses, pharmaciesDeletePharmacyErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pharmacies/{id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Read Pharmacy
+     */
+    public static readPharmacy<ThrowOnError extends boolean = true>(options: Options<pharmaciesReadPharmacyData, ThrowOnError>) {
+        return (options.client ?? client).get<pharmaciesReadPharmacyResponses, pharmaciesReadPharmacyErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pharmacies/{id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Update Pharmacy
+     */
+    public static updatePharmacy<ThrowOnError extends boolean = true>(options: Options<pharmaciesUpdatePharmacyData, ThrowOnError>) {
+        return (options.client ?? client).put<pharmaciesUpdatePharmacyResponses, pharmaciesUpdatePharmacyErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/pharmacies/{id}',
             ...options,
             headers: {
                 'Content-Type': 'application/json',

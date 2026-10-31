@@ -5,6 +5,7 @@ from enum import StrEnum
 from pydantic import EmailStr
 from sqlalchemy import JSON, String
 from sqlmodel import Field, Relationship, SQLModel
+from sqlalchemy import DateTime
 
 
 def get_datetime_utc() -> datetime:
@@ -68,6 +69,16 @@ class UsersPublic(SQLModel):
     count: int
 
 
+
+
+
+
+
+
+
+
+
+
 # Shared properties
 class ItemBase(SQLModel):
     title: str = Field(min_length=1, max_length=255)
@@ -105,6 +116,13 @@ class ItemPublic(ItemBase):
 class ItemsPublic(SQLModel):
     data: list[ItemPublic]
     count: int
+
+
+
+
+
+
+
 
 
 # Generic message
@@ -307,4 +325,69 @@ class PrescriptionPublic(PrescriptionBase):
 
 class PrescriptionsPublic(SQLModel):
     data: list[PrescriptionPublic]
+    count: int
+
+
+
+
+
+
+
+# Shared properties
+class PharmacyBase(SQLModel):
+    name: str = Field(min_length=1, max_length=255, index=True)
+    license_number: str | None = Field(default=None, max_length=100)
+    phone: str | None = Field(default=None, max_length=50)
+    email: str | None = Field(default=None, max_length=255)
+    address_line1: str | None = Field(default=None, max_length=255)
+    address_line2: str | None = Field(default=None, max_length=255)
+    city: str | None = Field(default=None, max_length=100, index=True)
+    state: str | None = Field(default=None, max_length=100)
+    postal_code: str | None = Field(default=None, max_length=20)
+    country: str | None = Field(default=None, max_length=100)
+    is_active: bool = True
+
+
+# Properties to receive on creation
+class PharmacyCreate(PharmacyBase):
+    pass
+
+
+# Properties to receive on update (everything optional)
+class PharmacyUpdate(SQLModel):
+    name: str | None = Field(default=None, min_length=1, max_length=255)
+    license_number: str | None = Field(default=None, max_length=100)
+    phone: str | None = Field(default=None, max_length=50)
+    email: str | None = Field(default=None, max_length=255)
+    address_line1: str | None = Field(default=None, max_length=255)
+    address_line2: str | None = Field(default=None, max_length=255)
+    city: str | None = Field(default=None, max_length=100)
+    state: str | None = Field(default=None, max_length=100)
+    postal_code: str | None = Field(default=None, max_length=20)
+    country: str | None = Field(default=None, max_length=100)
+    is_active: bool | None = None
+
+
+# Database model
+class Pharmacy(PharmacyBase, table=True):
+    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
+    created_at: datetime | None = Field(
+        default_factory=get_datetime_utc,
+        sa_type=DateTime(timezone=True),  # type: ignore
+    )
+    updated_at: datetime | None = Field(
+        default_factory=get_datetime_utc,
+        sa_type=DateTime(timezone=True),  # type: ignore
+    )
+
+
+# Properties to return via API
+class PharmacyPublic(PharmacyBase):
+    id: uuid.UUID
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
+
+
+class PharmaciesPublic(SQLModel):
+    data: list[PharmacyPublic]
     count: int

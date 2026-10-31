@@ -448,6 +448,182 @@ export type PatientsPublic = {
 };
 
 /**
+ * PharmaciesPublic
+ */
+export type PharmaciesPublic = {
+    /**
+     * Data
+     */
+    data: Array<PharmacyPublic>;
+    /**
+     * Count
+     */
+    count: number;
+};
+
+/**
+ * PharmacyCreate
+ */
+export type PharmacyCreate = {
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * License Number
+     */
+    license_number?: string | null;
+    /**
+     * Phone
+     */
+    phone?: string | null;
+    /**
+     * Email
+     */
+    email?: string | null;
+    /**
+     * Address Line1
+     */
+    address_line1?: string | null;
+    /**
+     * Address Line2
+     */
+    address_line2?: string | null;
+    /**
+     * City
+     */
+    city?: string | null;
+    /**
+     * State
+     */
+    state?: string | null;
+    /**
+     * Postal Code
+     */
+    postal_code?: string | null;
+    /**
+     * Country
+     */
+    country?: string | null;
+    /**
+     * Is Active
+     */
+    is_active?: boolean;
+};
+
+/**
+ * PharmacyPublic
+ */
+export type PharmacyPublic = {
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * License Number
+     */
+    license_number?: string | null;
+    /**
+     * Phone
+     */
+    phone?: string | null;
+    /**
+     * Email
+     */
+    email?: string | null;
+    /**
+     * Address Line1
+     */
+    address_line1?: string | null;
+    /**
+     * Address Line2
+     */
+    address_line2?: string | null;
+    /**
+     * City
+     */
+    city?: string | null;
+    /**
+     * State
+     */
+    state?: string | null;
+    /**
+     * Postal Code
+     */
+    postal_code?: string | null;
+    /**
+     * Country
+     */
+    country?: string | null;
+    /**
+     * Is Active
+     */
+    is_active?: boolean;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Created At
+     */
+    created_at?: string | null;
+    /**
+     * Updated At
+     */
+    updated_at?: string | null;
+};
+
+/**
+ * PharmacyUpdate
+ */
+export type PharmacyUpdate = {
+    /**
+     * Name
+     */
+    name?: string | null;
+    /**
+     * License Number
+     */
+    license_number?: string | null;
+    /**
+     * Phone
+     */
+    phone?: string | null;
+    /**
+     * Email
+     */
+    email?: string | null;
+    /**
+     * Address Line1
+     */
+    address_line1?: string | null;
+    /**
+     * Address Line2
+     */
+    address_line2?: string | null;
+    /**
+     * City
+     */
+    city?: string | null;
+    /**
+     * State
+     */
+    state?: string | null;
+    /**
+     * Postal Code
+     */
+    postal_code?: string | null;
+    /**
+     * Country
+     */
+    country?: string | null;
+    /**
+     * Is Active
+     */
+    is_active?: boolean | null;
+};
+
+/**
  * PrescriptionCreate
  */
 export type PrescriptionCreate = {
@@ -1851,6 +2027,163 @@ export type prescriptionsUpdatePrescriptionResponses = {
 };
 
 export type prescriptionsUpdatePrescriptionResponse = prescriptionsUpdatePrescriptionResponses[keyof prescriptionsUpdatePrescriptionResponses];
+
+export type pharmaciesReadPharmaciesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Q
+         */
+        q?: string | null;
+        /**
+         * Is Active
+         */
+        is_active?: boolean | null;
+    };
+    url: '/api/v1/pharmacies/';
+};
+
+export type pharmaciesReadPharmaciesErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pharmaciesReadPharmaciesError = pharmaciesReadPharmaciesErrors[keyof pharmaciesReadPharmaciesErrors];
+
+export type pharmaciesReadPharmaciesResponses = {
+    /**
+     * Successful Response
+     */
+    200: PharmaciesPublic;
+};
+
+export type pharmaciesReadPharmaciesResponse = pharmaciesReadPharmaciesResponses[keyof pharmaciesReadPharmaciesResponses];
+
+export type pharmaciesCreatePharmacyData = {
+    body: PharmacyCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/pharmacies/';
+};
+
+export type pharmaciesCreatePharmacyErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pharmaciesCreatePharmacyError = pharmaciesCreatePharmacyErrors[keyof pharmaciesCreatePharmacyErrors];
+
+export type pharmaciesCreatePharmacyResponses = {
+    /**
+     * Successful Response
+     */
+    200: PharmacyPublic;
+};
+
+export type pharmaciesCreatePharmacyResponse = pharmaciesCreatePharmacyResponses[keyof pharmaciesCreatePharmacyResponses];
+
+export type pharmaciesDeletePharmacyData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/pharmacies/{id}';
+};
+
+export type pharmaciesDeletePharmacyErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pharmaciesDeletePharmacyError = pharmaciesDeletePharmacyErrors[keyof pharmaciesDeletePharmacyErrors];
+
+export type pharmaciesDeletePharmacyResponses = {
+    /**
+     * Successful Response
+     */
+    200: Message;
+};
+
+export type pharmaciesDeletePharmacyResponse = pharmaciesDeletePharmacyResponses[keyof pharmaciesDeletePharmacyResponses];
+
+export type pharmaciesReadPharmacyData = {
+    body?: never;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/pharmacies/{id}';
+};
+
+export type pharmaciesReadPharmacyErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pharmaciesReadPharmacyError = pharmaciesReadPharmacyErrors[keyof pharmaciesReadPharmacyErrors];
+
+export type pharmaciesReadPharmacyResponses = {
+    /**
+     * Successful Response
+     */
+    200: PharmacyPublic;
+};
+
+export type pharmaciesReadPharmacyResponse = pharmaciesReadPharmacyResponses[keyof pharmaciesReadPharmacyResponses];
+
+export type pharmaciesUpdatePharmacyData = {
+    body: PharmacyUpdate;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/pharmacies/{id}';
+};
+
+export type pharmaciesUpdatePharmacyErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type pharmaciesUpdatePharmacyError = pharmaciesUpdatePharmacyErrors[keyof pharmaciesUpdatePharmacyErrors];
+
+export type pharmaciesUpdatePharmacyResponses = {
+    /**
+     * Successful Response
+     */
+    200: PharmacyPublic;
+};
+
+export type pharmaciesUpdatePharmacyResponse = pharmaciesUpdatePharmacyResponses[keyof pharmaciesUpdatePharmacyResponses];
 
 export type privateCreateUserData = {
     body: PrivateUserCreate;
