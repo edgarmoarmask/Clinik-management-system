@@ -4,12 +4,12 @@ from typing import Literal, Self
 from pydantic import (
     EmailStr,
     HttpUrl,
-    PostgresDsn,
     computed_field,
     field_validator,
     model_validator,
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from sqlalchemy.engine import make_url
 
 
 class Settings(BaseSettings):
@@ -28,11 +28,12 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str
     SENTRY_DSN: HttpUrl | None = None
-    DATABASE_URL: PostgresDsn
+    # postgresql://user:pass@host:5432/db or sqlite:///./app.db
+    DATABASE_URL: str
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
-    def _use_psycopg_driver(cls, value: str | PostgresDsn) -> str:
+    def _use_psycopg_driver(cls, value: str) -> str:
         database_url = str(value)
         for scheme in ("postgres://", "postgresql://"):
             if database_url.startswith(scheme):
@@ -79,8 +80,10 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_non_default_secrets(self) -> Self:
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        for host in self.DATABASE_URL.hosts():
-            self._check_default_secret("DATABASE_URL password", host["password"])
+        # SQLite URLs have no password
+        db_password = make_url(self.DATABASE_URL).password
+        if db_password:
+            self._check_default_secret("DATABASE_URL password", str(db_password))
         self._check_default_secret(
             "FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD
         )

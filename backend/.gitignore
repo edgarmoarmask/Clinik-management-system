@@ -6,3 +6,7 @@ app.egg-info
 htmlcov
 .cache
 .venv
+# SQLite database (DATABASE_URL=sqlite:///./app.db)
+*.db
+*.db-wal
+*.db-shm

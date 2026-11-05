@@ -5,7 +5,6 @@ from enum import StrEnum
 from pydantic import EmailStr, field_validator
 from sqlalchemy import JSON, String
 from sqlmodel import Field, Relationship, SQLModel
-from sqlalchemy import DateTime
 
 
 def get_datetime_utc() -> datetime:
@@ -137,7 +136,8 @@ class Token(SQLModel):
 
 # Contents of JWT token
 class TokenPayload(SQLModel):
-    sub: str | None = None
+    # the user id; parsed so SQLite (which stores UUIDs as text) can look it up
+    sub: uuid.UUID | None = None
 
 
 class NewPassword(SQLModel):
@@ -459,14 +459,10 @@ class PharmacyUpdate(SQLModel):
 # Database model
 class Pharmacy(PharmacyBase, table=True):
     id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    created_at: datetime | None = Field(
-        default_factory=get_datetime_utc,
-        sa_type=DateTime(timezone=True),  # type: ignore
-    )
-    updated_at: datetime | None = Field(
-        default_factory=get_datetime_utc,
-        sa_type=DateTime(timezone=True),  # type: ignore
-    )
+    # plain datetime maps to SQLModel's UTCDateTime, which keeps the UTC
+    # timezone on databases without one (SQLite)
+    created_at: datetime | None = Field(default_factory=get_datetime_utc)
+    updated_at: datetime | None = Field(default_factory=get_datetime_utc)
 
 
 # Properties to return via API
