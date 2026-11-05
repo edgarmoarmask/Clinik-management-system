@@ -1,4 +1,4 @@
-from collections.abc import Generator
+from collections.abc import Callable, Generator
 from typing import Annotated
 
 import jwt
@@ -11,7 +11,7 @@ from sqlmodel import Session
 from app.core import security
 from app.core.config import settings
 from app.core.db import engine
-from app.models import TokenPayload, User
+from app.models import TokenPayload, User, UserRole
 
 reusable_oauth2 = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/login/access-token"
@@ -55,3 +55,21 @@ def get_current_active_superuser(current_user: CurrentUser) -> User:
             status_code=403, detail="The user doesn't have enough privileges"
         )
     return current_user
+
+
+def has_role(user: User, *roles: UserRole) -> bool:
+    """Superusers pass every role check."""
+    return user.is_superuser or user.role in roles
+
+
+def require_role(*roles: UserRole) -> Callable[[User], User]:
+    """Dependency: allow superusers and users with one of `roles`."""
+
+    def checker(current_user: CurrentUser) -> User:
+        if not has_role(current_user, *roles):
+            raise HTTPException(
+                status_code=403, detail="The user doesn't have enough privileges"
+            )
+        return current_user
+
+    return checker

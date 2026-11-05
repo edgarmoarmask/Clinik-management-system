@@ -1,10 +1,14 @@
 import {
   BarChart3,
-  Briefcase,
+  CalendarClock,
   ClipboardList,
   FileHeart,
+  FileText,
   Home,
+  Landmark,
   Pill,
+  Receipt,
+  ShoppingBag,
   Users,
 } from "lucide-react"
 
@@ -17,6 +21,7 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar"
 import useAuth from "@/hooks/useAuth"
+import { hasRole } from "@/lib/roles"
 import { type Item, Main } from "./Main"
 import { User } from "./User"
 
@@ -26,15 +31,38 @@ const baseItems: Item[] = [
   { icon: FileHeart, title: "Clinical Records", path: "/clinical-records" },
   { icon: Pill, title: "Prescriptions", path: "/prescriptions" },
   { icon: BarChart3, title: "Analytics", path: "/analytics" },
-  { icon: Briefcase, title: "Items", path: "/items" },
+  { icon: ShoppingBag, title: "Products", path: "/products" },
 ]
 
 export function AppSidebar() {
   const { user: currentUser } = useAuth()
 
-  const items = currentUser?.is_superuser
-    ? [...baseItems, { icon: Users, title: "Admin", path: "/admin" }]
-    : baseItems
+  const items = [
+    ...baseItems,
+    ...(hasRole(currentUser, "cashier", "doctor")
+      ? [{ icon: CalendarClock, title: "Appointments", path: "/appointments" }]
+      : []),
+    ...(hasRole(currentUser, "cashier")
+      ? [
+          {
+            icon: Landmark,
+            title: "Accounting",
+            path: "/accounting",
+            children: [
+              { icon: FileText, title: "Reports", path: "/accounting/reports" },
+              {
+                icon: Receipt,
+                title: "Transactions",
+                path: "/accounting/transactions",
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(currentUser?.is_superuser
+      ? [{ icon: Users, title: "Admin", path: "/admin" }]
+      : []),
+  ]
 
   return (
     <Sidebar collapsible="icon">

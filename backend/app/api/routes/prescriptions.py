@@ -1,10 +1,10 @@
 import uuid
-from typing import Any
+from typing import Annotated, Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import col, func, select
 
-from app.api.deps import CurrentUser, SessionDep
+from app.api.deps import CurrentUser, SessionDep, require_role
 from app.models import (
     Message,
     Patient,
@@ -14,6 +14,8 @@ from app.models import (
     PrescriptionsPublic,
     PrescriptionStatus,
     PrescriptionUpdate,
+    User,
+    UserRole,
     get_datetime_utc,
 )
 
@@ -64,12 +66,16 @@ def read_prescription(
 def create_prescription(
     *,
     session: SessionDep,
-    current_user: CurrentUser,
+    current_user: Annotated[User, Depends(require_role(UserRole.DOCTOR))],
     prescription_in: PrescriptionCreate,
 ) -> Any:
+    """Doctors and superusers only. `prescribed_by` is the current user."""
     if not session.get(Patient, prescription_in.patient_id):
         raise HTTPException(status_code=404, detail="Patient not found")
-    prescription = Prescription.model_validate(prescription_in)
+    prescription = Prescription.model_validate(
+        prescription_in,
+        update={"prescribed_by": current_user.full_name or current_user.email},
+    )
     session.add(prescription)
     session.commit()
     session.refresh(prescription)

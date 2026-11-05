@@ -7,7 +7,18 @@ from sqlmodel import Session, delete
 from app.core.config import settings
 from app.core.db import engine, init_db
 from app.main import app
-from app.models import ClinicalRecord, Item, Patient, Prescription, User
+from app.models import (
+    Appointment,
+    Cart,
+    CartItem,
+    ClinicalRecord,
+    Item,
+    Patient,
+    Payment,
+    Prescription,
+    Product,
+    User,
+)
 from tests.utils.user import authentication_token_from_email
 from tests.utils.utils import get_superuser_token_headers
 
@@ -17,7 +28,17 @@ def db() -> Generator[Session]:
     with Session(engine) as session:
         init_db(session)
         yield session
-        for model in (ClinicalRecord, Prescription, Patient, Item):
+        for model in (
+            Appointment,
+            Payment,
+            CartItem,
+            Cart,
+            Product,
+            ClinicalRecord,
+            Prescription,
+            Patient,
+            Item,
+        ):
             session.execute(delete(model))
         statement = delete(User)
         session.execute(statement)

@@ -68,12 +68,12 @@ def test_patient_crud_and_children(
             "medication": "Paracetamol",
             "dosage": "500mg",
             "frequency": "Twice daily",
-            "prescribed_by": "Dr. Lim",
             "prescribed_date": "2026-10-01",
         },
     )
     assert rx.status_code == 200, rx.text
     assert rx.json()["status"] == "Active"
+    assert rx.json()["prescribed_by"]  # filled in from the logged-in user
 
     r = client.get(
         f"{settings.API_V1_STR}/prescriptions/",
@@ -108,7 +108,6 @@ def test_invalid_enum_and_missing_patient(
             "medication": "m",
             "dosage": "d",
             "frequency": "f",
-            "prescribed_by": "p",
             "prescribed_date": "2026-10-01",
         },
     )

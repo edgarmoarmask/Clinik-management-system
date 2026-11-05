@@ -55,6 +55,8 @@ const useAuth = () => {
 
   const logout = () => {
     localStorage.removeItem("access_token")
+    // drop cached data (cart, payments, ...) so the next user can't see it
+    queryClient.clear()
     navigate({ to: "/login" })
   }
 

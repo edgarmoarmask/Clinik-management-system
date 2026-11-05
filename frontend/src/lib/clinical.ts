@@ -21,6 +21,14 @@ export function patientsQueryOptions() {
   }
 }
 
+export function patientQueryOptions(id: string) {
+  return {
+    queryKey: ["patients", id],
+    queryFn: async () =>
+      (await PatientsService.readPatient({ path: { id } })).data,
+  }
+}
+
 export function clinicalRecordsQueryOptions(patientId?: string) {
   return {
     queryKey: ["clinical-records", { patientId }],

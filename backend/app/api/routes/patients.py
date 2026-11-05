@@ -1,10 +1,11 @@
 import uuid
 from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import col, func, or_, select
 
-from app.api.deps import CurrentUser, SessionDep
+from app.api.deps import CurrentUser, SessionDep, get_current_active_superuser
+from app.api.routes.appointments import display_name, get_doctor
 from app.models import (
     Message,
     Patient,
@@ -67,17 +68,24 @@ def create_patient(
     *, session: SessionDep, current_user: CurrentUser, patient_in: PatientCreate
 ) -> Any:
     patient = Patient.model_validate(patient_in)
+    if patient_in.physician_id:
+        doctor = get_doctor(session, patient_in.physician_id)
+        patient.physician_name = display_name(doctor)
     session.add(patient)
     session.commit()
     session.refresh(patient)
     return patient
 
 
-@router.put("/{id}", response_model=PatientPublic)
+# Editing and deleting patients is for superusers only.
+@router.put(
+    "/{id}",
+    response_model=PatientPublic,
+    dependencies=[Depends(get_current_active_superuser)],
+)
 def update_patient(
     *,
     session: SessionDep,
-    current_user: CurrentUser,
     id: uuid.UUID,
     patient_in: PatientUpdate,
 ) -> Any:
@@ -85,6 +93,11 @@ def update_patient(
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
     patient.sqlmodel_update(patient_in.model_dump(exclude_unset=True))
+    if patient_in.physician_id:
+        doctor = get_doctor(session, patient_in.physician_id)
+        patient.physician_name = display_name(doctor)
+    elif "physician_id" in patient_in.model_fields_set:
+        patient.physician_name = None
     patient.updated_at = get_datetime_utc()
     session.add(patient)
     session.commit()
@@ -92,10 +105,8 @@ def update_patient(
     return patient
 
 
-@router.delete("/{id}")
-def delete_patient(
-    session: SessionDep, current_user: CurrentUser, id: uuid.UUID
-) -> Message:
+@router.delete("/{id}", dependencies=[Depends(get_current_active_superuser)])
+def delete_patient(session: SessionDep, id: uuid.UUID) -> Message:
     patient = session.get(Patient, id)
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")

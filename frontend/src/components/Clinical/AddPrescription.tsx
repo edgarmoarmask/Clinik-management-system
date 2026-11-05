@@ -32,6 +32,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { LoadingButton } from "@/components/ui/loading-button"
 import {
   Select,
@@ -40,6 +41,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import useAuth from "@/hooks/useAuth"
 import useCustomToast from "@/hooks/useCustomToast"
 import { emrNumber, fullName } from "@/lib/clinical"
 import { handleError } from "@/utils"
@@ -49,7 +51,6 @@ const formSchema = z.object({
   medication: z.string().min(1, { message: "Medication is required" }),
   dosage: z.string().min(1, { message: "Dosage is required" }),
   frequency: z.string().min(1, { message: "Frequency is required" }),
-  prescribed_by: z.string().min(1, { message: "Prescriber is required" }),
   expiry_date: z.string().optional(),
   allergy_checked: z.boolean(),
 })
@@ -60,6 +61,7 @@ const AddPrescription = ({ patients }: { patients: PatientPublic[] }) => {
   const [isOpen, setIsOpen] = useState(false)
   const queryClient = useQueryClient()
   const { showSuccessToast, showErrorToast } = useCustomToast()
+  const { user } = useAuth()
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -70,7 +72,6 @@ const AddPrescription = ({ patients }: { patients: PatientPublic[] }) => {
       medication: "",
       dosage: "",
       frequency: "",
-      prescribed_by: "",
       expiry_date: "",
       allergy_checked: false,
     },
@@ -213,22 +214,15 @@ const AddPrescription = ({ patients }: { patients: PatientPublic[] }) => {
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="prescribed_by"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>
-                        Prescribed By{" "}
-                        <span className="text-destructive">*</span>
-                      </FormLabel>
-                      <FormControl>
-                        <Input {...field} required />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                {/* The server records the logged-in user as the prescriber. */}
+                <div className="grid gap-2">
+                  <Label>Prescribed By</Label>
+                  <Input
+                    value={user?.full_name || user?.email || ""}
+                    disabled
+                    readOnly
+                  />
+                </div>
                 <FormField
                   control={form.control}
                   name="expiry_date"

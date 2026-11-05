@@ -28,6 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import useAuth from "@/hooks/useAuth"
 import useCustomToast from "@/hooks/useCustomToast"
 import {
   formatDate,
@@ -35,6 +36,7 @@ import {
   patientsQueryOptions,
   prescriptionsQueryOptions,
 } from "@/lib/clinical"
+import { hasRole } from "@/lib/roles"
 import { handleError } from "@/utils"
 
 export const Route = createFileRoute("/_layout/prescriptions")({
@@ -42,7 +44,7 @@ export const Route = createFileRoute("/_layout/prescriptions")({
   head: () => ({
     meta: [
       {
-        title: "E-Prescriptions - FastAPI Template",
+        title: "E-Prescriptions - Wellness Center Management System",
       },
     ],
   }),
@@ -58,6 +60,8 @@ const FILTERS = ["All", "Active", "Completed", "Cancelled"] as const
 
 function Prescriptions() {
   const queryClient = useQueryClient()
+  const { user } = useAuth()
+  const canPrescribe = hasRole(user, "doctor")
   const { showErrorToast } = useCustomToast()
   const patients = useQuery(patientsQueryOptions())
   const prescriptions = useQuery(prescriptionsQueryOptions())
@@ -135,7 +139,9 @@ function Prescriptions() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <AddPrescription patients={patients.data?.data ?? []} />
+        {canPrescribe && (
+          <AddPrescription patients={patients.data?.data ?? []} />
+        )}
       </PageHeader>
 
       <div className="grid gap-4 sm:grid-cols-3">

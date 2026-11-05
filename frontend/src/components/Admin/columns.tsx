@@ -3,6 +3,7 @@ import type { ColumnDef } from "@tanstack/react-table"
 import type { UserPublic } from "@/client"
 import type { DataTableFeatures } from "@/components/Common/DataTable"
 import { Badge } from "@/components/ui/badge"
+import { ROLE_LABEL } from "@/lib/roles"
 import { cn } from "@/lib/utils"
 import { UserActionsMenu } from "./UserActionsMenu"
 
@@ -42,11 +43,17 @@ export const columns: ColumnDef<DataTableFeatures, UserTableData>[] = [
   {
     accessorKey: "is_superuser",
     header: "Role",
-    cell: ({ row }) => (
-      <Badge variant={row.original.is_superuser ? "default" : "secondary"}>
-        {row.original.is_superuser ? "Superuser" : "User"}
-      </Badge>
-    ),
+    cell: ({ row }) => {
+      const { is_superuser, role } = row.original
+      return (
+        <div className="flex gap-1">
+          <Badge variant={is_superuser ? "default" : "secondary"}>
+            {is_superuser ? "Superuser" : "User"}
+          </Badge>
+          {role && <Badge variant="outline">{ROLE_LABEL[role]}</Badge>}
+        </div>
+      )
+    },
   },
   {
     accessorKey: "is_active",

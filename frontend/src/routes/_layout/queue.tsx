@@ -37,7 +37,7 @@ export const Route = createFileRoute("/_layout/queue")({
   head: () => ({
     meta: [
       {
-        title: "Patient Queue - FastAPI Template",
+        title: "Patient Queue - Wellness Center Management System",
       },
     ],
   }),

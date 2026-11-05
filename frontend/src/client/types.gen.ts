@@ -5,6 +5,149 @@ export type ClientOptions = {
 };
 
 /**
+ * Account
+ */
+export type Account = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Name Bm
+     */
+    name_bm?: string | null;
+    type: AccountType;
+    /**
+     * Parent
+     */
+    parent?: string | null;
+    /**
+     * Is Header
+     */
+    is_header?: boolean;
+};
+
+/**
+ * AccountType
+ */
+export type AccountType = 'ASSET' | 'LIABILITY' | 'EQUITY' | 'REVENUE' | 'COGS' | 'EXPENSE';
+
+/**
+ * AppointmentCreate
+ */
+export type AppointmentCreate = {
+    /**
+     * Scheduled At
+     */
+    scheduled_at: string;
+    /**
+     * Duration Minutes
+     */
+    duration_minutes?: number;
+    /**
+     * Reason
+     */
+    reason?: string | null;
+    /**
+     * Patient Id
+     */
+    patient_id: string;
+    /**
+     * Doctor Id
+     */
+    doctor_id: string;
+};
+
+/**
+ * AppointmentPublic
+ */
+export type AppointmentPublic = {
+    /**
+     * Scheduled At
+     */
+    scheduled_at: string;
+    /**
+     * Duration Minutes
+     */
+    duration_minutes: number;
+    /**
+     * Reason
+     */
+    reason?: string | null;
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Patient Id
+     */
+    patient_id: string;
+    /**
+     * Patient Name
+     */
+    patient_name: string;
+    /**
+     * Doctor Id
+     */
+    doctor_id: string;
+    /**
+     * Doctor Name
+     */
+    doctor_name: string;
+    status: AppointmentStatus;
+    /**
+     * Created At
+     */
+    created_at?: string | null;
+};
+
+/**
+ * AppointmentStatus
+ */
+export type AppointmentStatus = 'Scheduled' | 'Completed' | 'Cancelled' | 'NoShow';
+
+/**
+ * AppointmentUpdate
+ */
+export type AppointmentUpdate = {
+    /**
+     * Scheduled At
+     */
+    scheduled_at?: string | null;
+    /**
+     * Duration Minutes
+     */
+    duration_minutes?: number | null;
+    /**
+     * Reason
+     */
+    reason?: string | null;
+    /**
+     * Doctor Id
+     */
+    doctor_id?: string | null;
+    status?: AppointmentStatus | null;
+};
+
+/**
+ * AppointmentsPublic
+ */
+export type AppointmentsPublic = {
+    /**
+     * Data
+     */
+    data: Array<AppointmentPublic>;
+    /**
+     * Count
+     */
+    count: number;
+};
+
+/**
  * Body_login-login_access_token
  */
 export type Body_login_login_access_token = {
@@ -33,6 +176,104 @@ export type Body_login_login_access_token = {
      */
     client_secret?: string | null;
 };
+
+/**
+ * CartItemCreate
+ */
+export type CartItemCreate = {
+    /**
+     * Product Id
+     */
+    product_id: number;
+    /**
+     * Quantity
+     */
+    quantity?: number;
+    /**
+     * Prescription Ref
+     */
+    prescription_ref?: string | null;
+};
+
+/**
+ * CartItemRead
+ */
+export type CartItemRead = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Product Id
+     */
+    product_id: number;
+    /**
+     * Product Name
+     */
+    product_name: string;
+    /**
+     * Quantity
+     */
+    quantity: number;
+    /**
+     * Unit Price
+     */
+    unit_price: string;
+    /**
+     * Line Total
+     */
+    line_total: string;
+    /**
+     * Requires Prescription
+     */
+    requires_prescription: boolean;
+    /**
+     * Prescription Ref
+     */
+    prescription_ref: string | null;
+};
+
+/**
+ * CartItemUpdate
+ */
+export type CartItemUpdate = {
+    /**
+     * Quantity
+     */
+    quantity?: number | null;
+    /**
+     * Prescription Ref
+     */
+    prescription_ref?: string | null;
+};
+
+/**
+ * CartRead
+ */
+export type CartRead = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * User Id
+     */
+    user_id: string;
+    status: CartStatus;
+    /**
+     * Items
+     */
+    items: Array<CartItemRead>;
+    /**
+     * Total
+     */
+    total: string;
+};
+
+/**
+ * CartStatus
+ */
+export type CartStatus = 'active' | 'checked_out';
 
 /**
  * ClinicalRecordCreate
@@ -159,6 +400,20 @@ export type ClinicalRecordsPublic = {
      * Count
      */
     count: number;
+};
+
+/**
+ * DoctorPublic
+ */
+export type DoctorPublic = {
+    /**
+     * Id
+     */
+    id: string;
+    /**
+     * Name
+     */
+    name: string;
 };
 
 /**
@@ -301,6 +556,18 @@ export type PatientCreate = {
      */
     physician_name?: string | null;
     /**
+     * Weight Kg
+     */
+    weight_kg?: number | null;
+    /**
+     * Height Cm
+     */
+    height_cm?: number | null;
+    /**
+     * Blood Pressure
+     */
+    blood_pressure?: string | null;
+    /**
      * Last Visit
      */
     last_visit?: string | null;
@@ -312,6 +579,10 @@ export type PatientCreate = {
      * Alert Message
      */
     alert_message?: string | null;
+    /**
+     * Physician Id
+     */
+    physician_id?: string | null;
 };
 
 /**
@@ -357,6 +628,18 @@ export type PatientPublic = {
      */
     physician_name?: string | null;
     /**
+     * Weight Kg
+     */
+    weight_kg?: number | null;
+    /**
+     * Height Cm
+     */
+    height_cm?: number | null;
+    /**
+     * Blood Pressure
+     */
+    blood_pressure?: string | null;
+    /**
      * Last Visit
      */
     last_visit?: string | null;
@@ -372,6 +655,10 @@ export type PatientPublic = {
      * Id
      */
     id: string;
+    /**
+     * Physician Id
+     */
+    physician_id?: string | null;
     /**
      * Created At
      */
@@ -420,6 +707,22 @@ export type PatientUpdate = {
      */
     physician_name?: string | null;
     /**
+     * Physician Id
+     */
+    physician_id?: string | null;
+    /**
+     * Weight Kg
+     */
+    weight_kg?: number | null;
+    /**
+     * Height Cm
+     */
+    height_cm?: number | null;
+    /**
+     * Blood Pressure
+     */
+    blood_pressure?: string | null;
+    /**
      * Last Visit
      */
     last_visit?: string | null;
@@ -441,6 +744,165 @@ export type PatientsPublic = {
      * Data
      */
     data: Array<PatientPublic>;
+    /**
+     * Count
+     */
+    count: number;
+};
+
+/**
+ * PaymentConfirm
+ *
+ * Result reported by your payment gateway / cashier.
+ */
+export type PaymentConfirm = {
+    /**
+     * Success
+     */
+    success: boolean;
+    method: PaymentMethod;
+    /**
+     * Transaction Ref
+     */
+    transaction_ref?: string | null;
+};
+
+/**
+ * PaymentCreate
+ *
+ * A payment recorded manually in accounting: money received (income)
+ * or money spent (expense). Amounts are always positive.
+ */
+export type PaymentCreate = {
+    /**
+     * Amount
+     */
+    amount: number | string;
+    kind?: PaymentKind;
+    /**
+     * Account Code
+     */
+    account_code: string;
+    method: PaymentMethod;
+    status?: PaymentStatus;
+    /**
+     * Transaction Ref
+     */
+    transaction_ref?: string | null;
+    /**
+     * Description
+     */
+    description?: string | null;
+};
+
+/**
+ * PaymentKind
+ */
+export type PaymentKind = 'income' | 'expense';
+
+/**
+ * PaymentMethod
+ */
+export type PaymentMethod = 'cash' | 'card' | 'bank_transfer' | 'ewallet';
+
+/**
+ * PaymentRead
+ */
+export type PaymentRead = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Cart Id
+     */
+    cart_id: number | null;
+    /**
+     * User Id
+     */
+    user_id: string;
+    /**
+     * Amount
+     */
+    amount: string;
+    kind: PaymentKind;
+    /**
+     * Account Code
+     */
+    account_code: string;
+    method: PaymentMethod | null;
+    status: PaymentStatus;
+    /**
+     * Transaction Ref
+     */
+    transaction_ref: string | null;
+    /**
+     * Description
+     */
+    description: string | null;
+    /**
+     * Created At
+     */
+    created_at: string;
+    /**
+     * Paid At
+     */
+    paid_at: string | null;
+};
+
+/**
+ * PaymentStatus
+ */
+export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'cancelled';
+
+/**
+ * PaymentSummary
+ *
+ * Totals of paid income/expenses; counts are of income payments.
+ */
+export type PaymentSummary = {
+    /**
+     * Total Paid
+     */
+    total_paid: string;
+    /**
+     * Total Expenses
+     */
+    total_expenses: string;
+    /**
+     * Profit
+     */
+    profit: string;
+    /**
+     * Total Pending
+     */
+    total_pending: string;
+    /**
+     * Count Paid
+     */
+    count_paid: number;
+    /**
+     * Count Pending
+     */
+    count_pending: number;
+    /**
+     * Count Failed
+     */
+    count_failed: number;
+    /**
+     * Count Cancelled
+     */
+    count_cancelled: number;
+};
+
+/**
+ * PaymentsPublic
+ */
+export type PaymentsPublic = {
+    /**
+     * Data
+     */
+    data: Array<PaymentRead>;
     /**
      * Count
      */
@@ -640,10 +1102,6 @@ export type PrescriptionCreate = {
      */
     frequency: string;
     /**
-     * Prescribed By
-     */
-    prescribed_by: string;
-    /**
      * Prescribed Date
      */
     prescribed_date: string;
@@ -679,10 +1137,6 @@ export type PrescriptionPublic = {
      */
     frequency: string;
     /**
-     * Prescribed By
-     */
-    prescribed_by: string;
-    /**
      * Prescribed Date
      */
     prescribed_date: string;
@@ -699,6 +1153,10 @@ export type PrescriptionPublic = {
      * Id
      */
     id: string;
+    /**
+     * Prescribed By
+     */
+    prescribed_by: string;
     /**
      * Patient Id
      */
@@ -734,10 +1192,6 @@ export type PrescriptionUpdate = {
      * Frequency
      */
     frequency?: string | null;
-    /**
-     * Prescribed By
-     */
-    prescribed_by?: string | null;
     /**
      * Prescribed Date
      */
@@ -790,6 +1244,226 @@ export type PrivateUserCreate = {
 };
 
 /**
+ * ProductCreate
+ */
+export type ProductCreate = {
+    /**
+     * Sku
+     */
+    sku: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Generic Name
+     */
+    generic_name?: string | null;
+    /**
+     * Description
+     */
+    description?: string | null;
+    /**
+     * Dosage Form
+     */
+    dosage_form?: string | null;
+    /**
+     * Strength
+     */
+    strength?: string | null;
+    /**
+     * Manufacturer
+     */
+    manufacturer?: string | null;
+    /**
+     * Price
+     */
+    price: number | string;
+    /**
+     * Stock
+     */
+    stock?: number;
+    /**
+     * Requires Prescription
+     */
+    requires_prescription?: boolean;
+    /**
+     * Expiry Date
+     */
+    expiry_date?: string | null;
+    /**
+     * Is Active
+     */
+    is_active?: boolean;
+};
+
+/**
+ * ProductRead
+ */
+export type ProductRead = {
+    /**
+     * Sku
+     */
+    sku: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Generic Name
+     */
+    generic_name?: string | null;
+    /**
+     * Description
+     */
+    description?: string | null;
+    /**
+     * Dosage Form
+     */
+    dosage_form?: string | null;
+    /**
+     * Strength
+     */
+    strength?: string | null;
+    /**
+     * Manufacturer
+     */
+    manufacturer?: string | null;
+    /**
+     * Price
+     */
+    price: string;
+    /**
+     * Stock
+     */
+    stock?: number;
+    /**
+     * Requires Prescription
+     */
+    requires_prescription?: boolean;
+    /**
+     * Expiry Date
+     */
+    expiry_date?: string | null;
+    /**
+     * Is Active
+     */
+    is_active?: boolean;
+    /**
+     * Id
+     */
+    id: number;
+};
+
+/**
+ * ProductUpdate
+ */
+export type ProductUpdate = {
+    /**
+     * Name
+     */
+    name?: string | null;
+    /**
+     * Generic Name
+     */
+    generic_name?: string | null;
+    /**
+     * Description
+     */
+    description?: string | null;
+    /**
+     * Dosage Form
+     */
+    dosage_form?: string | null;
+    /**
+     * Strength
+     */
+    strength?: string | null;
+    /**
+     * Manufacturer
+     */
+    manufacturer?: string | null;
+    /**
+     * Price
+     */
+    price?: number | string | null;
+    /**
+     * Stock
+     */
+    stock?: number | null;
+    /**
+     * Requires Prescription
+     */
+    requires_prescription?: boolean | null;
+    /**
+     * Expiry Date
+     */
+    expiry_date?: string | null;
+    /**
+     * Is Active
+     */
+    is_active?: boolean | null;
+};
+
+/**
+ * ProfitAndLoss
+ *
+ * Cash-basis P&L: paid payments only, grouped by account.
+ */
+export type ProfitAndLoss = {
+    /**
+     * Revenue
+     */
+    revenue: Array<ReportLine>;
+    /**
+     * Total Revenue
+     */
+    total_revenue: string;
+    /**
+     * Cost Of Sales
+     */
+    cost_of_sales: Array<ReportLine>;
+    /**
+     * Total Cost Of Sales
+     */
+    total_cost_of_sales: string;
+    /**
+     * Gross Profit
+     */
+    gross_profit: string;
+    /**
+     * Expenses
+     */
+    expenses: Array<ReportLine>;
+    /**
+     * Total Expenses
+     */
+    total_expenses: string;
+    /**
+     * Net Profit
+     */
+    net_profit: string;
+};
+
+/**
+ * ReportLine
+ */
+export type ReportLine = {
+    /**
+     * Code
+     */
+    code: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Amount
+     */
+    amount: string;
+};
+
+/**
  * Token
  */
 export type Token = {
@@ -837,6 +1511,7 @@ export type UserCreate = {
      * Full Name
      */
     full_name?: string | null;
+    role?: UserRole | null;
     /**
      * Password
      */
@@ -863,6 +1538,7 @@ export type UserPublic = {
      * Full Name
      */
     full_name?: string | null;
+    role?: UserRole | null;
     /**
      * Id
      */
@@ -892,6 +1568,13 @@ export type UserRegister = {
 };
 
 /**
+ * UserRole
+ *
+ * Staff role. Superusers (admins) can do everything regardless of role.
+ */
+export type UserRole = 'doctor' | 'cashier';
+
+/**
  * UserUpdate
  */
 export type UserUpdate = {
@@ -911,6 +1594,7 @@ export type UserUpdate = {
      * Full Name
      */
     full_name?: string | null;
+    role?: UserRole | null;
     /**
      * Password
      */
@@ -2028,6 +2712,133 @@ export type prescriptionsUpdatePrescriptionResponses = {
 
 export type prescriptionsUpdatePrescriptionResponse = prescriptionsUpdatePrescriptionResponses[keyof prescriptionsUpdatePrescriptionResponses];
 
+export type appointmentsListDoctorsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/appointments/doctors';
+};
+
+export type appointmentsListDoctorsResponses = {
+    /**
+     * Response Appointments-List Doctors
+     *
+     * Successful Response
+     */
+    200: Array<DoctorPublic>;
+};
+
+export type appointmentsListDoctorsResponse = appointmentsListDoctorsResponses[keyof appointmentsListDoctorsResponses];
+
+export type appointmentsReadAppointmentsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Start
+         */
+        start?: string | null;
+        /**
+         * End
+         */
+        end?: string | null;
+        /**
+         * Doctor Id
+         */
+        doctor_id?: string | null;
+        /**
+         * Patient Id
+         */
+        patient_id?: string | null;
+        /**
+         * Status
+         */
+        status?: AppointmentStatus | null;
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+    };
+    url: '/api/v1/appointments/';
+};
+
+export type appointmentsReadAppointmentsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type appointmentsReadAppointmentsError = appointmentsReadAppointmentsErrors[keyof appointmentsReadAppointmentsErrors];
+
+export type appointmentsReadAppointmentsResponses = {
+    /**
+     * Successful Response
+     */
+    200: AppointmentsPublic;
+};
+
+export type appointmentsReadAppointmentsResponse = appointmentsReadAppointmentsResponses[keyof appointmentsReadAppointmentsResponses];
+
+export type appointmentsCreateAppointmentData = {
+    body: AppointmentCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/appointments/';
+};
+
+export type appointmentsCreateAppointmentErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type appointmentsCreateAppointmentError = appointmentsCreateAppointmentErrors[keyof appointmentsCreateAppointmentErrors];
+
+export type appointmentsCreateAppointmentResponses = {
+    /**
+     * Successful Response
+     */
+    200: AppointmentPublic;
+};
+
+export type appointmentsCreateAppointmentResponse = appointmentsCreateAppointmentResponses[keyof appointmentsCreateAppointmentResponses];
+
+export type appointmentsUpdateAppointmentData = {
+    body: AppointmentUpdate;
+    path: {
+        /**
+         * Id
+         */
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/appointments/{id}';
+};
+
+export type appointmentsUpdateAppointmentErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type appointmentsUpdateAppointmentError = appointmentsUpdateAppointmentErrors[keyof appointmentsUpdateAppointmentErrors];
+
+export type appointmentsUpdateAppointmentResponses = {
+    /**
+     * Successful Response
+     */
+    200: AppointmentPublic;
+};
+
+export type appointmentsUpdateAppointmentResponse = appointmentsUpdateAppointmentResponses[keyof appointmentsUpdateAppointmentResponses];
+
 export type pharmaciesReadPharmaciesData = {
     body?: never;
     path?: never;
@@ -2184,6 +2995,563 @@ export type pharmaciesUpdatePharmacyResponses = {
 };
 
 export type pharmaciesUpdatePharmacyResponse = pharmaciesUpdatePharmacyResponses[keyof pharmaciesUpdatePharmacyResponses];
+
+export type productsListProductsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Q
+         *
+         * Search name or generic name
+         */
+        q?: string | null;
+        /**
+         * Requires Prescription
+         */
+        requires_prescription?: boolean | null;
+        /**
+         * In Stock
+         */
+        in_stock?: boolean;
+        /**
+         * Include Inactive
+         */
+        include_inactive?: boolean;
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+    };
+    url: '/api/v1/products';
+};
+
+export type productsListProductsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type productsListProductsError = productsListProductsErrors[keyof productsListProductsErrors];
+
+export type productsListProductsResponses = {
+    /**
+     * Response Products-List Products
+     *
+     * Successful Response
+     */
+    200: Array<ProductRead>;
+};
+
+export type productsListProductsResponse = productsListProductsResponses[keyof productsListProductsResponses];
+
+export type productsCreateProductData = {
+    body: ProductCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/products';
+};
+
+export type productsCreateProductErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type productsCreateProductError = productsCreateProductErrors[keyof productsCreateProductErrors];
+
+export type productsCreateProductResponses = {
+    /**
+     * Successful Response
+     */
+    201: ProductRead;
+};
+
+export type productsCreateProductResponse = productsCreateProductResponses[keyof productsCreateProductResponses];
+
+export type productsCreateProductsBatchData = {
+    /**
+     * Payload
+     */
+    body: Array<ProductCreate>;
+    path?: never;
+    query?: never;
+    url: '/api/v1/products/batch';
+};
+
+export type productsCreateProductsBatchErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type productsCreateProductsBatchError = productsCreateProductsBatchErrors[keyof productsCreateProductsBatchErrors];
+
+export type productsCreateProductsBatchResponses = {
+    /**
+     * Response Products-Create Products Batch
+     *
+     * Successful Response
+     */
+    201: Array<ProductRead>;
+};
+
+export type productsCreateProductsBatchResponse = productsCreateProductsBatchResponses[keyof productsCreateProductsBatchResponses];
+
+export type productsDeactivateProductData = {
+    body?: never;
+    path: {
+        /**
+         * Product Id
+         */
+        product_id: number;
+    };
+    query?: never;
+    url: '/api/v1/products/{product_id}';
+};
+
+export type productsDeactivateProductErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type productsDeactivateProductError = productsDeactivateProductErrors[keyof productsDeactivateProductErrors];
+
+export type productsDeactivateProductResponses = {
+    /**
+     * Successful Response
+     */
+    204: void;
+};
+
+export type productsDeactivateProductResponse = productsDeactivateProductResponses[keyof productsDeactivateProductResponses];
+
+export type productsGetProductData = {
+    body?: never;
+    path: {
+        /**
+         * Product Id
+         */
+        product_id: number;
+    };
+    query?: never;
+    url: '/api/v1/products/{product_id}';
+};
+
+export type productsGetProductErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type productsGetProductError = productsGetProductErrors[keyof productsGetProductErrors];
+
+export type productsGetProductResponses = {
+    /**
+     * Successful Response
+     */
+    200: ProductRead;
+};
+
+export type productsGetProductResponse = productsGetProductResponses[keyof productsGetProductResponses];
+
+export type productsUpdateProductData = {
+    body: ProductUpdate;
+    path: {
+        /**
+         * Product Id
+         */
+        product_id: number;
+    };
+    query?: never;
+    url: '/api/v1/products/{product_id}';
+};
+
+export type productsUpdateProductErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type productsUpdateProductError = productsUpdateProductErrors[keyof productsUpdateProductErrors];
+
+export type productsUpdateProductResponses = {
+    /**
+     * Successful Response
+     */
+    200: ProductRead;
+};
+
+export type productsUpdateProductResponse = productsUpdateProductResponses[keyof productsUpdateProductResponses];
+
+export type cartClearCartData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/cart';
+};
+
+export type cartClearCartResponses = {
+    /**
+     * Successful Response
+     */
+    200: CartRead;
+};
+
+export type cartClearCartResponse = cartClearCartResponses[keyof cartClearCartResponses];
+
+export type cartViewCartData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/cart';
+};
+
+export type cartViewCartResponses = {
+    /**
+     * Successful Response
+     */
+    200: CartRead;
+};
+
+export type cartViewCartResponse = cartViewCartResponses[keyof cartViewCartResponses];
+
+export type cartAddItemData = {
+    body: CartItemCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/cart/items';
+};
+
+export type cartAddItemErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type cartAddItemError = cartAddItemErrors[keyof cartAddItemErrors];
+
+export type cartAddItemResponses = {
+    /**
+     * Successful Response
+     */
+    201: CartRead;
+};
+
+export type cartAddItemResponse = cartAddItemResponses[keyof cartAddItemResponses];
+
+export type cartRemoveItemData = {
+    body?: never;
+    path: {
+        /**
+         * Item Id
+         */
+        item_id: number;
+    };
+    query?: never;
+    url: '/api/v1/cart/items/{item_id}';
+};
+
+export type cartRemoveItemErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type cartRemoveItemError = cartRemoveItemErrors[keyof cartRemoveItemErrors];
+
+export type cartRemoveItemResponses = {
+    /**
+     * Successful Response
+     */
+    200: CartRead;
+};
+
+export type cartRemoveItemResponse = cartRemoveItemResponses[keyof cartRemoveItemResponses];
+
+export type cartUpdateItemData = {
+    body: CartItemUpdate;
+    path: {
+        /**
+         * Item Id
+         */
+        item_id: number;
+    };
+    query?: never;
+    url: '/api/v1/cart/items/{item_id}';
+};
+
+export type cartUpdateItemErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type cartUpdateItemError = cartUpdateItemErrors[keyof cartUpdateItemErrors];
+
+export type cartUpdateItemResponses = {
+    /**
+     * Successful Response
+     */
+    200: CartRead;
+};
+
+export type cartUpdateItemResponse = cartUpdateItemResponses[keyof cartUpdateItemResponses];
+
+export type cartCheckoutData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/cart/checkout';
+};
+
+export type cartCheckoutResponses = {
+    /**
+     * Successful Response
+     */
+    201: PaymentRead;
+};
+
+export type cartCheckoutResponse = cartCheckoutResponses[keyof cartCheckoutResponses];
+
+export type paymentsListPaymentsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * User Id
+         */
+        user_id?: string | null;
+        /**
+         * Status
+         */
+        status?: PaymentStatus | null;
+        /**
+         * Skip
+         */
+        skip?: number;
+        /**
+         * Limit
+         */
+        limit?: number;
+    };
+    url: '/api/v1/payments';
+};
+
+export type paymentsListPaymentsErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type paymentsListPaymentsError = paymentsListPaymentsErrors[keyof paymentsListPaymentsErrors];
+
+export type paymentsListPaymentsResponses = {
+    /**
+     * Successful Response
+     */
+    200: PaymentsPublic;
+};
+
+export type paymentsListPaymentsResponse = paymentsListPaymentsResponses[keyof paymentsListPaymentsResponses];
+
+export type paymentsCreatePaymentData = {
+    body: PaymentCreate;
+    path?: never;
+    query?: never;
+    url: '/api/v1/payments';
+};
+
+export type paymentsCreatePaymentErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type paymentsCreatePaymentError = paymentsCreatePaymentErrors[keyof paymentsCreatePaymentErrors];
+
+export type paymentsCreatePaymentResponses = {
+    /**
+     * Successful Response
+     */
+    201: PaymentRead;
+};
+
+export type paymentsCreatePaymentResponse = paymentsCreatePaymentResponses[keyof paymentsCreatePaymentResponses];
+
+export type paymentsPaymentsSummaryData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/payments/summary';
+};
+
+export type paymentsPaymentsSummaryResponses = {
+    /**
+     * Successful Response
+     */
+    200: PaymentSummary;
+};
+
+export type paymentsPaymentsSummaryResponse = paymentsPaymentsSummaryResponses[keyof paymentsPaymentsSummaryResponses];
+
+export type paymentsReadPaymentData = {
+    body?: never;
+    path: {
+        /**
+         * Payment Id
+         */
+        payment_id: number;
+    };
+    query?: never;
+    url: '/api/v1/payments/{payment_id}';
+};
+
+export type paymentsReadPaymentErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type paymentsReadPaymentError = paymentsReadPaymentErrors[keyof paymentsReadPaymentErrors];
+
+export type paymentsReadPaymentResponses = {
+    /**
+     * Successful Response
+     */
+    200: PaymentRead;
+};
+
+export type paymentsReadPaymentResponse = paymentsReadPaymentResponses[keyof paymentsReadPaymentResponses];
+
+export type paymentsConfirmPaymentData = {
+    body: PaymentConfirm;
+    path: {
+        /**
+         * Payment Id
+         */
+        payment_id: number;
+    };
+    query?: never;
+    url: '/api/v1/payments/{payment_id}/confirm';
+};
+
+export type paymentsConfirmPaymentErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type paymentsConfirmPaymentError = paymentsConfirmPaymentErrors[keyof paymentsConfirmPaymentErrors];
+
+export type paymentsConfirmPaymentResponses = {
+    /**
+     * Successful Response
+     */
+    200: PaymentRead;
+};
+
+export type paymentsConfirmPaymentResponse = paymentsConfirmPaymentResponses[keyof paymentsConfirmPaymentResponses];
+
+export type paymentsCancelPaymentData = {
+    body?: never;
+    path: {
+        /**
+         * Payment Id
+         */
+        payment_id: number;
+    };
+    query?: never;
+    url: '/api/v1/payments/{payment_id}/cancel';
+};
+
+export type paymentsCancelPaymentErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type paymentsCancelPaymentError = paymentsCancelPaymentErrors[keyof paymentsCancelPaymentErrors];
+
+export type paymentsCancelPaymentResponses = {
+    /**
+     * Successful Response
+     */
+    200: PaymentRead;
+};
+
+export type paymentsCancelPaymentResponse = paymentsCancelPaymentResponses[keyof paymentsCancelPaymentResponses];
+
+export type accountingListAccountsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/accounting/accounts';
+};
+
+export type accountingListAccountsResponses = {
+    /**
+     * Response Accounting-List Accounts
+     *
+     * Successful Response
+     */
+    200: Array<Account>;
+};
+
+export type accountingListAccountsResponse = accountingListAccountsResponses[keyof accountingListAccountsResponses];
+
+export type accountingProfitAndLossData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Start
+         */
+        start?: string | null;
+        /**
+         * End
+         */
+        end?: string | null;
+    };
+    url: '/api/v1/accounting/profit-and-loss';
+};
+
+export type accountingProfitAndLossErrors = {
+    /**
+     * Validation Error
+     */
+    422: HTTPValidationError;
+};
+
+export type accountingProfitAndLossError = accountingProfitAndLossErrors[keyof accountingProfitAndLossErrors];
+
+export type accountingProfitAndLossResponses = {
+    /**
+     * Successful Response
+     */
+    200: ProfitAndLoss;
+};
+
+export type accountingProfitAndLossResponse = accountingProfitAndLossResponses[keyof accountingProfitAndLossResponses];
 
 export type privateCreateUserData = {
     body: PrivateUserCreate;

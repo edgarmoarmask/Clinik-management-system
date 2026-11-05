@@ -15,13 +15,20 @@ import { Route as RecoverPasswordRouteImport } from './routes/recover-password'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
+import { Route as LayoutAccountingRouteRouteImport } from './routes/_layout/accounting/route'
 import { Route as LayoutAdminRouteImport } from './routes/_layout/admin'
 import { Route as LayoutAnalyticsRouteImport } from './routes/_layout/analytics'
-import { Route as LayoutClinicalRecordsRouteImport } from './routes/_layout/clinical-records'
+import { Route as LayoutAppointmentsRouteImport } from './routes/_layout/appointments'
 import { Route as LayoutItemsRouteImport } from './routes/_layout/items'
 import { Route as LayoutPrescriptionsRouteImport } from './routes/_layout/prescriptions'
+import { Route as LayoutProductsRouteImport } from './routes/_layout/products'
 import { Route as LayoutQueueRouteImport } from './routes/_layout/queue'
 import { Route as LayoutSettingsRouteImport } from './routes/_layout/settings'
+import { Route as LayoutAccountingIndexRouteImport } from './routes/_layout/accounting/index'
+import { Route as LayoutAccountingReportsRouteImport } from './routes/_layout/accounting/reports'
+import { Route as LayoutAccountingTransactionsRouteImport } from './routes/_layout/accounting/transactions'
+import { Route as LayoutClinicalRecordsIndexRouteImport } from './routes/_layout/clinical-records/index'
+import { Route as LayoutClinicalRecordsPatientIdRouteImport } from './routes/_layout/clinical-records/$patientId'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -52,6 +59,11 @@ const LayoutIndexRoute = LayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutAccountingRouteRoute = LayoutAccountingRouteRouteImport.update({
+  id: '/accounting',
+  path: '/accounting',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutAdminRoute = LayoutAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -62,9 +74,9 @@ const LayoutAnalyticsRoute = LayoutAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutClinicalRecordsRoute = LayoutClinicalRecordsRouteImport.update({
-  id: '/clinical-records',
-  path: '/clinical-records',
+const LayoutAppointmentsRoute = LayoutAppointmentsRouteImport.update({
+  id: '/appointments',
+  path: '/appointments',
   getParentRoute: () => LayoutRoute,
 } as any)
 const LayoutItemsRoute = LayoutItemsRouteImport.update({
@@ -77,6 +89,11 @@ const LayoutPrescriptionsRoute = LayoutPrescriptionsRouteImport.update({
   path: '/prescriptions',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutProductsRoute = LayoutProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => LayoutRoute,
+} as any)
 const LayoutQueueRoute = LayoutQueueRouteImport.update({
   id: '/queue',
   path: '/queue',
@@ -87,6 +104,34 @@ const LayoutSettingsRoute = LayoutSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => LayoutRoute,
 } as any)
+const LayoutAccountingIndexRoute = LayoutAccountingIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LayoutAccountingRouteRoute,
+} as any)
+const LayoutAccountingReportsRoute = LayoutAccountingReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => LayoutAccountingRouteRoute,
+} as any)
+const LayoutAccountingTransactionsRoute =
+  LayoutAccountingTransactionsRouteImport.update({
+    id: '/transactions',
+    path: '/transactions',
+    getParentRoute: () => LayoutAccountingRouteRoute,
+  } as any)
+const LayoutClinicalRecordsIndexRoute =
+  LayoutClinicalRecordsIndexRouteImport.update({
+    id: '/clinical-records/',
+    path: '/clinical-records/',
+    getParentRoute: () => LayoutRoute,
+  } as any)
+const LayoutClinicalRecordsPatientIdRoute =
+  LayoutClinicalRecordsPatientIdRouteImport.update({
+    id: '/clinical-records/$patientId',
+    path: '/clinical-records/$patientId',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof LayoutIndexRoute
@@ -94,13 +139,20 @@ export interface FileRoutesByFullPath {
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/accounting': typeof LayoutAccountingRouteRouteWithChildren
   '/admin': typeof LayoutAdminRoute
   '/analytics': typeof LayoutAnalyticsRoute
-  '/clinical-records': typeof LayoutClinicalRecordsRoute
+  '/appointments': typeof LayoutAppointmentsRoute
   '/items': typeof LayoutItemsRoute
   '/prescriptions': typeof LayoutPrescriptionsRoute
+  '/products': typeof LayoutProductsRoute
   '/queue': typeof LayoutQueueRoute
   '/settings': typeof LayoutSettingsRoute
+  '/accounting/reports': typeof LayoutAccountingReportsRoute
+  '/accounting/transactions': typeof LayoutAccountingTransactionsRoute
+  '/clinical-records/$patientId': typeof LayoutClinicalRecordsPatientIdRoute
+  '/accounting/': typeof LayoutAccountingIndexRoute
+  '/clinical-records/': typeof LayoutClinicalRecordsIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
@@ -109,12 +161,18 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/admin': typeof LayoutAdminRoute
   '/analytics': typeof LayoutAnalyticsRoute
-  '/clinical-records': typeof LayoutClinicalRecordsRoute
+  '/appointments': typeof LayoutAppointmentsRoute
   '/items': typeof LayoutItemsRoute
   '/prescriptions': typeof LayoutPrescriptionsRoute
+  '/products': typeof LayoutProductsRoute
   '/queue': typeof LayoutQueueRoute
   '/settings': typeof LayoutSettingsRoute
   '/': typeof LayoutIndexRoute
+  '/accounting/reports': typeof LayoutAccountingReportsRoute
+  '/accounting/transactions': typeof LayoutAccountingTransactionsRoute
+  '/clinical-records/$patientId': typeof LayoutClinicalRecordsPatientIdRoute
+  '/accounting': typeof LayoutAccountingIndexRoute
+  '/clinical-records': typeof LayoutClinicalRecordsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -123,14 +181,21 @@ export interface FileRoutesById {
   '/recover-password': typeof RecoverPasswordRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/_layout/accounting': typeof LayoutAccountingRouteRouteWithChildren
   '/_layout/admin': typeof LayoutAdminRoute
   '/_layout/analytics': typeof LayoutAnalyticsRoute
-  '/_layout/clinical-records': typeof LayoutClinicalRecordsRoute
+  '/_layout/appointments': typeof LayoutAppointmentsRoute
   '/_layout/items': typeof LayoutItemsRoute
   '/_layout/prescriptions': typeof LayoutPrescriptionsRoute
+  '/_layout/products': typeof LayoutProductsRoute
   '/_layout/queue': typeof LayoutQueueRoute
   '/_layout/settings': typeof LayoutSettingsRoute
   '/_layout/': typeof LayoutIndexRoute
+  '/_layout/accounting/reports': typeof LayoutAccountingReportsRoute
+  '/_layout/accounting/transactions': typeof LayoutAccountingTransactionsRoute
+  '/_layout/clinical-records/$patientId': typeof LayoutClinicalRecordsPatientIdRoute
+  '/_layout/accounting/': typeof LayoutAccountingIndexRoute
+  '/_layout/clinical-records/': typeof LayoutClinicalRecordsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,13 +205,20 @@ export interface FileRouteTypes {
     | '/recover-password'
     | '/reset-password'
     | '/signup'
+    | '/accounting'
     | '/admin'
     | '/analytics'
-    | '/clinical-records'
+    | '/appointments'
     | '/items'
     | '/prescriptions'
+    | '/products'
     | '/queue'
     | '/settings'
+    | '/accounting/reports'
+    | '/accounting/transactions'
+    | '/clinical-records/$patientId'
+    | '/accounting/'
+    | '/clinical-records/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/login'
@@ -155,12 +227,18 @@ export interface FileRouteTypes {
     | '/signup'
     | '/admin'
     | '/analytics'
-    | '/clinical-records'
+    | '/appointments'
     | '/items'
     | '/prescriptions'
+    | '/products'
     | '/queue'
     | '/settings'
     | '/'
+    | '/accounting/reports'
+    | '/accounting/transactions'
+    | '/clinical-records/$patientId'
+    | '/accounting'
+    | '/clinical-records'
   id:
     | '__root__'
     | '/_layout'
@@ -168,14 +246,21 @@ export interface FileRouteTypes {
     | '/recover-password'
     | '/reset-password'
     | '/signup'
+    | '/_layout/accounting'
     | '/_layout/admin'
     | '/_layout/analytics'
-    | '/_layout/clinical-records'
+    | '/_layout/appointments'
     | '/_layout/items'
     | '/_layout/prescriptions'
+    | '/_layout/products'
     | '/_layout/queue'
     | '/_layout/settings'
     | '/_layout/'
+    | '/_layout/accounting/reports'
+    | '/_layout/accounting/transactions'
+    | '/_layout/clinical-records/$patientId'
+    | '/_layout/accounting/'
+    | '/_layout/clinical-records/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -230,6 +315,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/accounting': {
+      id: '/_layout/accounting'
+      path: '/accounting'
+      fullPath: '/accounting'
+      preLoaderRoute: typeof LayoutAccountingRouteRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/admin': {
       id: '/_layout/admin'
       path: '/admin'
@@ -244,11 +336,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAnalyticsRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/clinical-records': {
-      id: '/_layout/clinical-records'
-      path: '/clinical-records'
-      fullPath: '/clinical-records'
-      preLoaderRoute: typeof LayoutClinicalRecordsRouteImport
+    '/_layout/appointments': {
+      id: '/_layout/appointments'
+      path: '/appointments'
+      fullPath: '/appointments'
+      preLoaderRoute: typeof LayoutAppointmentsRouteImport
       parentRoute: typeof LayoutRoute
     }
     '/_layout/items': {
@@ -265,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutPrescriptionsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/products': {
+      id: '/_layout/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof LayoutProductsRouteImport
+      parentRoute: typeof LayoutRoute
+    }
     '/_layout/queue': {
       id: '/_layout/queue'
       path: '/queue'
@@ -279,29 +378,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutSettingsRouteImport
       parentRoute: typeof LayoutRoute
     }
+    '/_layout/accounting/': {
+      id: '/_layout/accounting/'
+      path: '/'
+      fullPath: '/accounting/'
+      preLoaderRoute: typeof LayoutAccountingIndexRouteImport
+      parentRoute: typeof LayoutAccountingRouteRoute
+    }
+    '/_layout/accounting/reports': {
+      id: '/_layout/accounting/reports'
+      path: '/reports'
+      fullPath: '/accounting/reports'
+      preLoaderRoute: typeof LayoutAccountingReportsRouteImport
+      parentRoute: typeof LayoutAccountingRouteRoute
+    }
+    '/_layout/accounting/transactions': {
+      id: '/_layout/accounting/transactions'
+      path: '/transactions'
+      fullPath: '/accounting/transactions'
+      preLoaderRoute: typeof LayoutAccountingTransactionsRouteImport
+      parentRoute: typeof LayoutAccountingRouteRoute
+    }
+    '/_layout/clinical-records/': {
+      id: '/_layout/clinical-records/'
+      path: '/clinical-records'
+      fullPath: '/clinical-records/'
+      preLoaderRoute: typeof LayoutClinicalRecordsIndexRouteImport
+      parentRoute: typeof LayoutRoute
+    }
+    '/_layout/clinical-records/$patientId': {
+      id: '/_layout/clinical-records/$patientId'
+      path: '/clinical-records/$patientId'
+      fullPath: '/clinical-records/$patientId'
+      preLoaderRoute: typeof LayoutClinicalRecordsPatientIdRouteImport
+      parentRoute: typeof LayoutRoute
+    }
   }
 }
 
+interface LayoutAccountingRouteRouteChildren {
+  LayoutAccountingReportsRoute: typeof LayoutAccountingReportsRoute
+  LayoutAccountingTransactionsRoute: typeof LayoutAccountingTransactionsRoute
+  LayoutAccountingIndexRoute: typeof LayoutAccountingIndexRoute
+}
+
+const LayoutAccountingRouteRouteChildren: LayoutAccountingRouteRouteChildren = {
+  LayoutAccountingReportsRoute: LayoutAccountingReportsRoute,
+  LayoutAccountingTransactionsRoute: LayoutAccountingTransactionsRoute,
+  LayoutAccountingIndexRoute: LayoutAccountingIndexRoute,
+}
+
+const LayoutAccountingRouteRouteWithChildren =
+  LayoutAccountingRouteRoute._addFileChildren(
+    LayoutAccountingRouteRouteChildren,
+  )
+
 interface LayoutRouteChildren {
+  LayoutAccountingRouteRoute: typeof LayoutAccountingRouteRouteWithChildren
   LayoutAdminRoute: typeof LayoutAdminRoute
   LayoutAnalyticsRoute: typeof LayoutAnalyticsRoute
-  LayoutClinicalRecordsRoute: typeof LayoutClinicalRecordsRoute
+  LayoutAppointmentsRoute: typeof LayoutAppointmentsRoute
   LayoutItemsRoute: typeof LayoutItemsRoute
   LayoutPrescriptionsRoute: typeof LayoutPrescriptionsRoute
+  LayoutProductsRoute: typeof LayoutProductsRoute
   LayoutQueueRoute: typeof LayoutQueueRoute
   LayoutSettingsRoute: typeof LayoutSettingsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
+  LayoutClinicalRecordsPatientIdRoute: typeof LayoutClinicalRecordsPatientIdRoute
+  LayoutClinicalRecordsIndexRoute: typeof LayoutClinicalRecordsIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutAccountingRouteRoute: LayoutAccountingRouteRouteWithChildren,
   LayoutAdminRoute: LayoutAdminRoute,
   LayoutAnalyticsRoute: LayoutAnalyticsRoute,
-  LayoutClinicalRecordsRoute: LayoutClinicalRecordsRoute,
+  LayoutAppointmentsRoute: LayoutAppointmentsRoute,
   LayoutItemsRoute: LayoutItemsRoute,
   LayoutPrescriptionsRoute: LayoutPrescriptionsRoute,
+  LayoutProductsRoute: LayoutProductsRoute,
   LayoutQueueRoute: LayoutQueueRoute,
   LayoutSettingsRoute: LayoutSettingsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
+  LayoutClinicalRecordsPatientIdRoute: LayoutClinicalRecordsPatientIdRoute,
+  LayoutClinicalRecordsIndexRoute: LayoutClinicalRecordsIndexRoute,
 }
 
 const LayoutRouteWithChildren =

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/_layout/analytics")({
   head: () => ({
     meta: [
       {
-        title: "Analytics - FastAPI Template",
+        title: "Analytics - Wellness Center Management System",
       },
     ],
   }),

@@ -30,6 +30,7 @@ import { Input } from "@/components/ui/input"
 import { LoadingButton } from "@/components/ui/loading-button"
 import useCustomToast from "@/hooks/useCustomToast"
 import { handleError } from "@/utils"
+import { NO_ROLE, RoleField, roleValues, toRole } from "./RoleField"
 
 const formSchema = z
   .object({
@@ -42,6 +43,7 @@ const formSchema = z
     confirm_password: z
       .string()
       .min(1, { message: "Please confirm your password" }),
+    role: z.enum(roleValues),
     is_superuser: z.boolean(),
     is_active: z.boolean(),
   })
@@ -66,6 +68,7 @@ const AddUser = () => {
       full_name: "",
       password: "",
       confirm_password: "",
+      role: NO_ROLE,
       is_superuser: false,
       is_active: false,
     },
@@ -85,7 +88,7 @@ const AddUser = () => {
   })
 
   const onSubmit = (data: FormData) => {
-    mutation.mutate(data)
+    mutation.mutate({ ...data, role: toRole(data.role) })
   }
 
   return (
@@ -183,6 +186,8 @@ const AddUser = () => {
                   </FormItem>
                 )}
               />
+
+              <RoleField />
 
               <FormField
                 control={form.control}

@@ -1,4 +1,5 @@
 from sqlmodel import Session, create_engine, select
+from sqlalchemy import event
 
 from app import crud
 from app.core.config import settings

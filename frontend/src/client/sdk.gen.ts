@@ -2,7 +2,7 @@
 
 import { type Client, type Options as Options2, type TDataShape, urlSearchParamsBodySerializer } from './client';
 import { client } from './client.gen';
-import type { clinicalRecordsCreateClinicalRecordData, clinicalRecordsCreateClinicalRecordErrors, clinicalRecordsCreateClinicalRecordResponses, clinicalRecordsDeleteClinicalRecordData, clinicalRecordsDeleteClinicalRecordErrors, clinicalRecordsDeleteClinicalRecordResponses, clinicalRecordsReadClinicalRecordData, clinicalRecordsReadClinicalRecordErrors, clinicalRecordsReadClinicalRecordResponses, clinicalRecordsReadClinicalRecordsData, clinicalRecordsReadClinicalRecordsErrors, clinicalRecordsReadClinicalRecordsResponses, clinicalRecordsUpdateClinicalRecordData, clinicalRecordsUpdateClinicalRecordErrors, clinicalRecordsUpdateClinicalRecordResponses, itemsCreateItemData, itemsCreateItemErrors, itemsCreateItemResponses, itemsDeleteItemData, itemsDeleteItemErrors, itemsDeleteItemResponses, itemsReadItemData, itemsReadItemErrors, itemsReadItemResponses, itemsReadItemsData, itemsReadItemsErrors, itemsReadItemsResponses, itemsUpdateItemData, itemsUpdateItemErrors, itemsUpdateItemResponses, loginLoginAccessTokenData, loginLoginAccessTokenErrors, loginLoginAccessTokenResponses, loginRecoverPasswordData, loginRecoverPasswordErrors, loginRecoverPasswordHtmlContentData, loginRecoverPasswordHtmlContentErrors, loginRecoverPasswordHtmlContentResponses, loginRecoverPasswordResponses, loginResetPasswordData, loginResetPasswordErrors, loginResetPasswordResponses, loginTestTokenData, loginTestTokenResponses, patientsCreatePatientData, patientsCreatePatientErrors, patientsCreatePatientResponses, patientsDeletePatientData, patientsDeletePatientErrors, patientsDeletePatientResponses, patientsReadPatientData, patientsReadPatientErrors, patientsReadPatientResponses, patientsReadPatientsData, patientsReadPatientsErrors, patientsReadPatientsResponses, patientsUpdatePatientData, patientsUpdatePatientErrors, patientsUpdatePatientResponses, pharmaciesCreatePharmacyData, pharmaciesCreatePharmacyErrors, pharmaciesCreatePharmacyResponses, pharmaciesDeletePharmacyData, pharmaciesDeletePharmacyErrors, pharmaciesDeletePharmacyResponses, pharmaciesReadPharmaciesData, pharmaciesReadPharmaciesErrors, pharmaciesReadPharmaciesResponses, pharmaciesReadPharmacyData, pharmaciesReadPharmacyErrors, pharmaciesReadPharmacyResponses, pharmaciesUpdatePharmacyData, pharmaciesUpdatePharmacyErrors, pharmaciesUpdatePharmacyResponses, prescriptionsCreatePrescriptionData, prescriptionsCreatePrescriptionErrors, prescriptionsCreatePrescriptionResponses, prescriptionsDeletePrescriptionData, prescriptionsDeletePrescriptionErrors, prescriptionsDeletePrescriptionResponses, prescriptionsReadPrescriptionData, prescriptionsReadPrescriptionErrors, prescriptionsReadPrescriptionResponses, prescriptionsReadPrescriptionsData, prescriptionsReadPrescriptionsErrors, prescriptionsReadPrescriptionsResponses, prescriptionsUpdatePrescriptionData, prescriptionsUpdatePrescriptionErrors, prescriptionsUpdatePrescriptionResponses, privateCreateUserData, privateCreateUserErrors, privateCreateUserResponses, usersCreateUserData, usersCreateUserErrors, usersCreateUserResponses, usersDeleteUserData, usersDeleteUserErrors, usersDeleteUserMeData, usersDeleteUserMeResponses, usersDeleteUserResponses, usersReadUserByIdData, usersReadUserByIdErrors, usersReadUserByIdResponses, usersReadUserMeData, usersReadUserMeResponses, usersReadUsersData, usersReadUsersErrors, usersReadUsersResponses, usersRegisterUserData, usersRegisterUserErrors, usersRegisterUserResponses, usersUpdatePasswordMeData, usersUpdatePasswordMeErrors, usersUpdatePasswordMeResponses, usersUpdateUserData, usersUpdateUserErrors, usersUpdateUserMeData, usersUpdateUserMeErrors, usersUpdateUserMeResponses, usersUpdateUserResponses, utilsHealthCheckData, utilsHealthCheckResponses, utilsTestEmailData, utilsTestEmailErrors, utilsTestEmailResponses } from './types.gen';
+import type { accountingListAccountsData, accountingListAccountsResponses, accountingProfitAndLossData, accountingProfitAndLossErrors, accountingProfitAndLossResponses, appointmentsCreateAppointmentData, appointmentsCreateAppointmentErrors, appointmentsCreateAppointmentResponses, appointmentsListDoctorsData, appointmentsListDoctorsResponses, appointmentsReadAppointmentsData, appointmentsReadAppointmentsErrors, appointmentsReadAppointmentsResponses, appointmentsUpdateAppointmentData, appointmentsUpdateAppointmentErrors, appointmentsUpdateAppointmentResponses, cartAddItemData, cartAddItemErrors, cartAddItemResponses, cartCheckoutData, cartCheckoutResponses, cartClearCartData, cartClearCartResponses, cartRemoveItemData, cartRemoveItemErrors, cartRemoveItemResponses, cartUpdateItemData, cartUpdateItemErrors, cartUpdateItemResponses, cartViewCartData, cartViewCartResponses, clinicalRecordsCreateClinicalRecordData, clinicalRecordsCreateClinicalRecordErrors, clinicalRecordsCreateClinicalRecordResponses, clinicalRecordsDeleteClinicalRecordData, clinicalRecordsDeleteClinicalRecordErrors, clinicalRecordsDeleteClinicalRecordResponses, clinicalRecordsReadClinicalRecordData, clinicalRecordsReadClinicalRecordErrors, clinicalRecordsReadClinicalRecordResponses, clinicalRecordsReadClinicalRecordsData, clinicalRecordsReadClinicalRecordsErrors, clinicalRecordsReadClinicalRecordsResponses, clinicalRecordsUpdateClinicalRecordData, clinicalRecordsUpdateClinicalRecordErrors, clinicalRecordsUpdateClinicalRecordResponses, itemsCreateItemData, itemsCreateItemErrors, itemsCreateItemResponses, itemsDeleteItemData, itemsDeleteItemErrors, itemsDeleteItemResponses, itemsReadItemData, itemsReadItemErrors, itemsReadItemResponses, itemsReadItemsData, itemsReadItemsErrors, itemsReadItemsResponses, itemsUpdateItemData, itemsUpdateItemErrors, itemsUpdateItemResponses, loginLoginAccessTokenData, loginLoginAccessTokenErrors, loginLoginAccessTokenResponses, loginRecoverPasswordData, loginRecoverPasswordErrors, loginRecoverPasswordHtmlContentData, loginRecoverPasswordHtmlContentErrors, loginRecoverPasswordHtmlContentResponses, loginRecoverPasswordResponses, loginResetPasswordData, loginResetPasswordErrors, loginResetPasswordResponses, loginTestTokenData, loginTestTokenResponses, patientsCreatePatientData, patientsCreatePatientErrors, patientsCreatePatientResponses, patientsDeletePatientData, patientsDeletePatientErrors, patientsDeletePatientResponses, patientsReadPatientData, patientsReadPatientErrors, patientsReadPatientResponses, patientsReadPatientsData, patientsReadPatientsErrors, patientsReadPatientsResponses, patientsUpdatePatientData, patientsUpdatePatientErrors, patientsUpdatePatientResponses, paymentsCancelPaymentData, paymentsCancelPaymentErrors, paymentsCancelPaymentResponses, paymentsConfirmPaymentData, paymentsConfirmPaymentErrors, paymentsConfirmPaymentResponses, paymentsCreatePaymentData, paymentsCreatePaymentErrors, paymentsCreatePaymentResponses, paymentsListPaymentsData, paymentsListPaymentsErrors, paymentsListPaymentsResponses, paymentsPaymentsSummaryData, paymentsPaymentsSummaryResponses, paymentsReadPaymentData, paymentsReadPaymentErrors, paymentsReadPaymentResponses, pharmaciesCreatePharmacyData, pharmaciesCreatePharmacyErrors, pharmaciesCreatePharmacyResponses, pharmaciesDeletePharmacyData, pharmaciesDeletePharmacyErrors, pharmaciesDeletePharmacyResponses, pharmaciesReadPharmaciesData, pharmaciesReadPharmaciesErrors, pharmaciesReadPharmaciesResponses, pharmaciesReadPharmacyData, pharmaciesReadPharmacyErrors, pharmaciesReadPharmacyResponses, pharmaciesUpdatePharmacyData, pharmaciesUpdatePharmacyErrors, pharmaciesUpdatePharmacyResponses, prescriptionsCreatePrescriptionData, prescriptionsCreatePrescriptionErrors, prescriptionsCreatePrescriptionResponses, prescriptionsDeletePrescriptionData, prescriptionsDeletePrescriptionErrors, prescriptionsDeletePrescriptionResponses, prescriptionsReadPrescriptionData, prescriptionsReadPrescriptionErrors, prescriptionsReadPrescriptionResponses, prescriptionsReadPrescriptionsData, prescriptionsReadPrescriptionsErrors, prescriptionsReadPrescriptionsResponses, prescriptionsUpdatePrescriptionData, prescriptionsUpdatePrescriptionErrors, prescriptionsUpdatePrescriptionResponses, privateCreateUserData, privateCreateUserErrors, privateCreateUserResponses, productsCreateProductData, productsCreateProductErrors, productsCreateProductResponses, productsCreateProductsBatchData, productsCreateProductsBatchErrors, productsCreateProductsBatchResponses, productsDeactivateProductData, productsDeactivateProductErrors, productsDeactivateProductResponses, productsGetProductData, productsGetProductErrors, productsGetProductResponses, productsListProductsData, productsListProductsErrors, productsListProductsResponses, productsUpdateProductData, productsUpdateProductErrors, productsUpdateProductResponses, usersCreateUserData, usersCreateUserErrors, usersCreateUserResponses, usersDeleteUserData, usersDeleteUserErrors, usersDeleteUserMeData, usersDeleteUserMeResponses, usersDeleteUserResponses, usersReadUserByIdData, usersReadUserByIdErrors, usersReadUserByIdResponses, usersReadUserMeData, usersReadUserMeResponses, usersReadUsersData, usersReadUsersErrors, usersReadUsersResponses, usersRegisterUserData, usersRegisterUserErrors, usersRegisterUserResponses, usersUpdatePasswordMeData, usersUpdatePasswordMeErrors, usersUpdatePasswordMeResponses, usersUpdateUserData, usersUpdateUserErrors, usersUpdateUserMeData, usersUpdateUserMeErrors, usersUpdateUserMeResponses, usersUpdateUserResponses, utilsHealthCheckData, utilsHealthCheckResponses, utilsTestEmailData, utilsTestEmailErrors, utilsTestEmailResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -525,6 +525,8 @@ export class PrescriptionsService {
     
     /**
      * Create Prescription
+     *
+     * Doctors and superusers only. `prescribed_by` is the current user.
      */
     public static createPrescription<ThrowOnError extends boolean = true>(options: Options<prescriptionsCreatePrescriptionData, ThrowOnError>) {
         return (options.client ?? client).post<prescriptionsCreatePrescriptionResponses, prescriptionsCreatePrescriptionErrors, ThrowOnError>({
@@ -571,6 +573,71 @@ export class PrescriptionsService {
             responseType: 'json',
             security: [{ scheme: 'bearer', type: 'http' }],
             url: '/api/v1/prescriptions/{id}',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+}
+
+export class AppointmentsService {
+    /**
+     * List Doctors
+     *
+     * Active users with the doctor role, for booking and patient forms.
+     */
+    public static listDoctors<ThrowOnError extends boolean = true>(options?: Options<appointmentsListDoctorsData, ThrowOnError>) {
+        return (options?.client ?? client).get<appointmentsListDoctorsResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/appointments/doctors',
+            ...options
+        });
+    }
+    
+    /**
+     * Read Appointments
+     *
+     * Cashiers and superusers see every appointment; doctors only their own.
+     */
+    public static readAppointments<ThrowOnError extends boolean = true>(options?: Options<appointmentsReadAppointmentsData, ThrowOnError>) {
+        return (options?.client ?? client).get<appointmentsReadAppointmentsResponses, appointmentsReadAppointmentsErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/appointments/',
+            ...options
+        });
+    }
+    
+    /**
+     * Create Appointment
+     */
+    public static createAppointment<ThrowOnError extends boolean = true>(options: Options<appointmentsCreateAppointmentData, ThrowOnError>) {
+        return (options.client ?? client).post<appointmentsCreateAppointmentResponses, appointmentsCreateAppointmentErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/appointments/',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Update Appointment
+     *
+     * Cashiers can change anything; a doctor can only update the status of
+     * their own appointments (e.g. mark it completed).
+     */
+    public static updateAppointment<ThrowOnError extends boolean = true>(options: Options<appointmentsUpdateAppointmentData, ThrowOnError>) {
+        return (options.client ?? client).patch<appointmentsUpdateAppointmentResponses, appointmentsUpdateAppointmentErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/appointments/{id}',
             ...options,
             headers: {
                 'Content-Type': 'application/json',
@@ -648,6 +715,298 @@ export class PharmaciesService {
                 'Content-Type': 'application/json',
                 ...options.headers
             }
+        });
+    }
+}
+
+export class ProductsService {
+    /**
+     * List Products
+     */
+    public static listProducts<ThrowOnError extends boolean = true>(options?: Options<productsListProductsData, ThrowOnError>) {
+        return (options?.client ?? client).get<productsListProductsResponses, productsListProductsErrors, ThrowOnError>({
+            responseType: 'json',
+            url: '/api/v1/products',
+            ...options
+        });
+    }
+    
+    /**
+     * Create Product
+     */
+    public static createProduct<ThrowOnError extends boolean = true>(options: Options<productsCreateProductData, ThrowOnError>) {
+        return (options.client ?? client).post<productsCreateProductResponses, productsCreateProductErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/products',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Create Products Batch
+     *
+     * Create many products at once. All-or-nothing: if any SKU is repeated in
+     * the batch or already exists, nothing is created.
+     */
+    public static createProductsBatch<ThrowOnError extends boolean = true>(options: Options<productsCreateProductsBatchData, ThrowOnError>) {
+        return (options.client ?? client).post<productsCreateProductsBatchResponses, productsCreateProductsBatchErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/products/batch',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Deactivate Product
+     *
+     * Soft delete: keeps history for past carts and payments.
+     */
+    public static deactivateProduct<ThrowOnError extends boolean = true>(options: Options<productsDeactivateProductData, ThrowOnError>) {
+        return (options.client ?? client).delete<productsDeactivateProductResponses, productsDeactivateProductErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/products/{product_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Get Product
+     */
+    public static getProduct<ThrowOnError extends boolean = true>(options: Options<productsGetProductData, ThrowOnError>) {
+        return (options.client ?? client).get<productsGetProductResponses, productsGetProductErrors, ThrowOnError>({
+            responseType: 'json',
+            url: '/api/v1/products/{product_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Update Product
+     */
+    public static updateProduct<ThrowOnError extends boolean = true>(options: Options<productsUpdateProductData, ThrowOnError>) {
+        return (options.client ?? client).patch<productsUpdateProductResponses, productsUpdateProductErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/products/{product_id}',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+}
+
+export class CartService {
+    /**
+     * Clear Cart
+     */
+    public static clearCart<ThrowOnError extends boolean = true>(options?: Options<cartClearCartData, ThrowOnError>) {
+        return (options?.client ?? client).delete<cartClearCartResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/cart',
+            ...options
+        });
+    }
+    
+    /**
+     * View Cart
+     */
+    public static viewCart<ThrowOnError extends boolean = true>(options?: Options<cartViewCartData, ThrowOnError>) {
+        return (options?.client ?? client).get<cartViewCartResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/cart',
+            ...options
+        });
+    }
+    
+    /**
+     * Add Item
+     */
+    public static addItem<ThrowOnError extends boolean = true>(options: Options<cartAddItemData, ThrowOnError>) {
+        return (options.client ?? client).post<cartAddItemResponses, cartAddItemErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/cart/items',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Remove Item
+     */
+    public static removeItem<ThrowOnError extends boolean = true>(options: Options<cartRemoveItemData, ThrowOnError>) {
+        return (options.client ?? client).delete<cartRemoveItemResponses, cartRemoveItemErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/cart/items/{item_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Update Item
+     */
+    public static updateItem<ThrowOnError extends boolean = true>(options: Options<cartUpdateItemData, ThrowOnError>) {
+        return (options.client ?? client).patch<cartUpdateItemResponses, cartUpdateItemErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/cart/items/{item_id}',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Checkout
+     *
+     * Validate the cart, reserve stock, and create a pending payment.
+     */
+    public static checkout<ThrowOnError extends boolean = true>(options?: Options<cartCheckoutData, ThrowOnError>) {
+        return (options?.client ?? client).post<cartCheckoutResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/cart/checkout',
+            ...options
+        });
+    }
+}
+
+export class PaymentsService {
+    /**
+     * List Payments
+     *
+     * Cashiers and superusers see all payments; other users only their own.
+     */
+    public static listPayments<ThrowOnError extends boolean = true>(options?: Options<paymentsListPaymentsData, ThrowOnError>) {
+        return (options?.client ?? client).get<paymentsListPaymentsResponses, paymentsListPaymentsErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/payments',
+            ...options
+        });
+    }
+    
+    /**
+     * Create Payment
+     *
+     * Record income received outside checkout, or an expense (accounting).
+     */
+    public static createPayment<ThrowOnError extends boolean = true>(options: Options<paymentsCreatePaymentData, ThrowOnError>) {
+        return (options.client ?? client).post<paymentsCreatePaymentResponses, paymentsCreatePaymentErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/payments',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Payments Summary
+     */
+    public static paymentsSummary<ThrowOnError extends boolean = true>(options?: Options<paymentsPaymentsSummaryData, ThrowOnError>) {
+        return (options?.client ?? client).get<paymentsPaymentsSummaryResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/payments/summary',
+            ...options
+        });
+    }
+    
+    /**
+     * Read Payment
+     */
+    public static readPayment<ThrowOnError extends boolean = true>(options: Options<paymentsReadPaymentData, ThrowOnError>) {
+        return (options.client ?? client).get<paymentsReadPaymentResponses, paymentsReadPaymentErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/payments/{payment_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * Confirm Payment
+     *
+     * Record the gateway/cashier result. Protect this route (or turn it into a
+     * signed webhook) before going to production.
+     */
+    public static confirmPayment<ThrowOnError extends boolean = true>(options: Options<paymentsConfirmPaymentData, ThrowOnError>) {
+        return (options.client ?? client).post<paymentsConfirmPaymentResponses, paymentsConfirmPaymentErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/payments/{payment_id}/confirm',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * Cancel Payment
+     */
+    public static cancelPayment<ThrowOnError extends boolean = true>(options: Options<paymentsCancelPaymentData, ThrowOnError>) {
+        return (options.client ?? client).post<paymentsCancelPaymentResponses, paymentsCancelPaymentErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/payments/{payment_id}/cancel',
+            ...options
+        });
+    }
+}
+
+export class AccountingService {
+    /**
+     * List Accounts
+     *
+     * The chart of accounts, for account pickers.
+     */
+    public static listAccounts<ThrowOnError extends boolean = true>(options?: Options<accountingListAccountsData, ThrowOnError>) {
+        return (options?.client ?? client).get<accountingListAccountsResponses, unknown, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/accounting/accounts',
+            ...options
+        });
+    }
+    
+    /**
+     * Profit And Loss
+     *
+     * Paid amounts per account between `start` (inclusive) and `end`
+     * (exclusive), by payment date.
+     */
+    public static profitAndLoss<ThrowOnError extends boolean = true>(options?: Options<accountingProfitAndLossData, ThrowOnError>) {
+        return (options?.client ?? client).get<accountingProfitAndLossResponses, accountingProfitAndLossErrors, ThrowOnError>({
+            responseType: 'json',
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/api/v1/accounting/profit-and-loss',
+            ...options
         });
     }
 }

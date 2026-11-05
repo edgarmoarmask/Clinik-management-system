@@ -4,7 +4,7 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 from sqlmodel import col, func, select
 
-from app.api.deps import CurrentUser, SessionDep
+from app.api.deps import CurrentUser, SessionDep, has_role
 from app.models import (
     ClinicalRecord,
     ClinicalRecordCreate,
@@ -13,11 +13,42 @@ from app.models import (
     ClinicalRecordUpdate,
     Message,
     Patient,
+    User,
+    UserRole,
     VisitType,
     get_datetime_utc,
 )
 
 router = APIRouter(prefix="/clinical-records", tags=["clinical-records"])
+
+
+def check_can_diagnose(user: User) -> None:
+    if not has_role(user, UserRole.DOCTOR):
+        raise HTTPException(status_code=403, detail="Only doctors can set a diagnosis")
+
+
+def sync_patient_summary(session: SessionDep, patient_id: uuid.UUID) -> None:
+    """Keep the patient's last visit / recent diagnosis in step with their records."""
+    patient = session.get(Patient, patient_id)
+    by_date = (
+        select(ClinicalRecord)
+        .where(ClinicalRecord.patient_id == patient_id)
+        .order_by(col(ClinicalRecord.visit_date).desc())
+    )
+    latest = session.exec(by_date).first()
+    if latest and (
+        patient.last_visit is None or latest.visit_date.date() > patient.last_visit
+    ):
+        patient.last_visit = latest.visit_date.date()
+    diagnosed = session.exec(
+        by_date.where(col(ClinicalRecord.diagnosis).is_not(None)).where(
+            ClinicalRecord.diagnosis != ""
+        )
+    ).first()
+    if diagnosed:
+        patient.recent_diagnosis = diagnosed.diagnosis
+    patient.updated_at = get_datetime_utc()
+    session.add(patient)
 
 
 @router.get("/", response_model=ClinicalRecordsPublic)
@@ -65,8 +96,12 @@ def create_clinical_record(
 ) -> Any:
     if not session.get(Patient, record_in.patient_id):
         raise HTTPException(status_code=404, detail="Patient not found")
+    if record_in.diagnosis:
+        check_can_diagnose(current_user)
     record = ClinicalRecord.model_validate(record_in)
     session.add(record)
+    session.flush()
+    sync_patient_summary(session, record.patient_id)
     session.commit()
     session.refresh(record)
     return record
@@ -83,9 +118,14 @@ def update_clinical_record(
     record = session.get(ClinicalRecord, id)
     if not record:
         raise HTTPException(status_code=404, detail="Clinical record not found")
-    record.sqlmodel_update(record_in.model_dump(exclude_unset=True))
+    update = record_in.model_dump(exclude_unset=True)
+    if update.get("diagnosis", record.diagnosis) != record.diagnosis:
+        check_can_diagnose(current_user)
+    record.sqlmodel_update(update)
     record.updated_at = get_datetime_utc()
     session.add(record)
+    session.flush()
+    sync_patient_summary(session, record.patient_id)
     session.commit()
     session.refresh(record)
     return record

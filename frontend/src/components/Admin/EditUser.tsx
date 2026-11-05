@@ -5,7 +5,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { type UserPublic, UsersService } from "@/client"
+import { type UserPublic, UsersService, type UserUpdate } from "@/client"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
@@ -30,6 +30,7 @@ import { Input } from "@/components/ui/input"
 import { LoadingButton } from "@/components/ui/loading-button"
 import useCustomToast from "@/hooks/useCustomToast"
 import { handleError } from "@/utils"
+import { NO_ROLE, RoleField, roleValues, toRole } from "./RoleField"
 
 const formSchema = z
   .object({
@@ -41,6 +42,7 @@ const formSchema = z
       .optional()
       .or(z.literal("")),
     confirm_password: z.string().optional(),
+    role: z.enum(roleValues),
     is_superuser: z.boolean().optional(),
     is_active: z.boolean().optional(),
   })
@@ -68,13 +70,14 @@ const EditUser = ({ user, onSuccess }: EditUserProps) => {
     defaultValues: {
       email: user.email,
       full_name: user.full_name ?? undefined,
+      role: user.role ?? NO_ROLE,
       is_superuser: user.is_superuser,
       is_active: user.is_active,
     },
   })
 
   const mutation = useMutation({
-    mutationFn: (data: FormData) =>
+    mutationFn: (data: UserUpdate) =>
       UsersService.updateUser({ path: { user_id: user.id }, body: data }),
     onSuccess: () => {
       showSuccessToast("User updated successfully")
@@ -89,11 +92,11 @@ const EditUser = ({ user, onSuccess }: EditUserProps) => {
 
   const onSubmit = (data: FormData) => {
     // exclude confirm_password from submission data and remove password if empty
-    const { confirm_password: _, ...submitData } = data
+    const { confirm_password: _, role, ...submitData } = data
     if (!submitData.password) {
       delete submitData.password
     }
-    mutation.mutate(submitData)
+    mutation.mutate({ ...submitData, role: toRole(role) })
   }
 
   return (
@@ -185,6 +188,8 @@ const EditUser = ({ user, onSuccess }: EditUserProps) => {
                   </FormItem>
                 )}
               />
+
+              <RoleField />
 
               <FormField
                 control={form.control}

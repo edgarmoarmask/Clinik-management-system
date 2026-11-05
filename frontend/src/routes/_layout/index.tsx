@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { Clock, Pill, Stethoscope, Users } from "lucide-react"
+import { TodaysAppointments } from "@/components/Appointments/TodaysAppointments"
 import { ColumnChart } from "@/components/Clinical/charts"
 import {
   EmptyState,
@@ -34,7 +35,7 @@ export const Route = createFileRoute("/_layout/")({
   head: () => ({
     meta: [
       {
-        title: "Dashboard - FastAPI Template",
+        title: "Dashboard - Wellness Center Management System",
       },
     ],
   }),
@@ -108,6 +109,8 @@ function Dashboard() {
           warn={unchecked.length > 0}
         />
       </div>
+
+      {currentUser?.role === "doctor" && <TodaysAppointments />}
 
       <div className="grid gap-6 lg:grid-cols-5">
         <Card className="lg:col-span-3">
