@@ -62,4 +62,6 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 WORKDIR /app/backend/
 
-CMD ["fastapi", "run", "--workers", "4"]
+# SQLite allows one writer at a time; several worker processes would hit
+# "database is locked" under load
+CMD ["fastapi", "run", "--workers", "1"]

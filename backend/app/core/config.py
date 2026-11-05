@@ -9,7 +9,6 @@ from pydantic import (
     model_validator,
 )
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from sqlalchemy.engine import make_url
 
 
 class Settings(BaseSettings):
@@ -28,17 +27,17 @@ class Settings(BaseSettings):
 
     PROJECT_NAME: str
     SENTRY_DSN: HttpUrl | None = None
-    # postgresql://user:pass@host:5432/db or sqlite:///./app.db
+    # sqlite:///./app.db (relative to backend/) or sqlite:////abs/path.db
     DATABASE_URL: str
 
-    @field_validator("DATABASE_URL", mode="before")
+    @field_validator("DATABASE_URL")
     @classmethod
-    def _use_psycopg_driver(cls, value: str) -> str:
-        database_url = str(value)
-        for scheme in ("postgres://", "postgresql://"):
-            if database_url.startswith(scheme):
-                return database_url.replace(scheme, "postgresql+psycopg://", 1)
-        return database_url
+    def _require_sqlite(cls, value: str) -> str:
+        if not value.startswith("sqlite:"):
+            raise ValueError(
+                "DATABASE_URL must be a SQLite URL, e.g. sqlite:///./app.db"
+            )
+        return value
 
     SMTP_TLS: bool = True
     SMTP_SSL: bool = False
@@ -80,10 +79,6 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def _enforce_non_default_secrets(self) -> Self:
         self._check_default_secret("SECRET_KEY", self.SECRET_KEY)
-        # SQLite URLs have no password
-        db_password = make_url(self.DATABASE_URL).password
-        if db_password:
-            self._check_default_secret("DATABASE_URL password", str(db_password))
         self._check_default_secret(
             "FIRST_SUPERUSER_PASSWORD", self.FIRST_SUPERUSER_PASSWORD
         )

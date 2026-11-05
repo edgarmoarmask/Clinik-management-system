@@ -5,26 +5,23 @@ from app import crud
 from app.core.config import settings
 from app.models import User, UserCreate
 
-is_sqlite = settings.DATABASE_URL.startswith("sqlite")
-
 engine = create_engine(
     settings.DATABASE_URL,
     pool_pre_ping=True,
     # FastAPI runs requests in a thread pool; SQLite connections refuse that
     # by default
-    connect_args={"check_same_thread": False} if is_sqlite else {},
+    connect_args={"check_same_thread": False},
 )
 
-if is_sqlite:
 
-    @event.listens_for(engine, "connect")
-    def _sqlite_pragmas(dbapi_conn, _record):  # type: ignore[no-untyped-def]
-        cursor = dbapi_conn.cursor()
-        # SQLite ignores foreign keys (and ON DELETE CASCADE) unless enabled
-        cursor.execute("PRAGMA foreign_keys=ON")
-        # readers don't block the writer
-        cursor.execute("PRAGMA journal_mode=WAL")
-        cursor.close()
+@event.listens_for(engine, "connect")
+def _sqlite_pragmas(dbapi_conn, _record):  # type: ignore[no-untyped-def]
+    cursor = dbapi_conn.cursor()
+    # SQLite ignores foreign keys (and ON DELETE CASCADE) unless enabled
+    cursor.execute("PRAGMA foreign_keys=ON")
+    # readers don't block the writer
+    cursor.execute("PRAGMA journal_mode=WAL")
+    cursor.close()
 
 
 # make sure all SQLModel models are imported (app.models) before initializing DB
